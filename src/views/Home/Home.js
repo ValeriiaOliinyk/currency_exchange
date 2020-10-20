@@ -11,7 +11,15 @@ const Home = () => {
   useEffect(() => {
     dispatch(loadData());
   }, [dispatch]);
-  return <CurrencyList />;
+  return (
+    <main>
+      <section>
+        <h1>Quickly Convert</h1>
+        <p>List of available currencies</p>
+        <CurrencyList />
+      </section>
+    </main>
+  );
 };
 
 export default Home;

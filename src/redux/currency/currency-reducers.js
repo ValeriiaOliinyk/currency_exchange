@@ -1,5 +1,7 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 
+const BASE_URL = "https://api.exchangeratesapi.io/latest";
+
 export const FETCH_CURRENCY = "GET_CURRENCY";
 export const LOAD_DATA = "LOAD_DATA";
 
@@ -45,9 +47,7 @@ function* sagaWorker() {
 }
 
 function fetchAvailableCurrency() {
-  return fetch(
-    "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5"
-  ).then((response) => response.json());
+  return fetch(BASE_URL).then((response) => response.json());
 }
 
 // MUST export default a function called reducer()
