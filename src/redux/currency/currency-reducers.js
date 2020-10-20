@@ -1,5 +1,9 @@
+import { call, put, takeEvery } from "redux-saga/effects";
+
 export const FETCH_CURRENCY = "GET_CURRENCY";
 export const LOAD_DATA = "LOAD_DATA";
+
+// Actions
 
 export function fetchCurrency(data) {
   return {
@@ -18,6 +22,8 @@ const initialState = {
   currencyTypes: [],
 };
 
+// Reducers
+
 export const currencyReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_CURRENCY:
@@ -26,6 +32,23 @@ export const currencyReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+// Saga
+
+export function* sagaWatcher() {
+  yield takeEvery(LOAD_DATA, sagaWorker);
+}
+
+function* sagaWorker() {
+  const data = yield call(fetchAvailableCurrency);
+  yield put(fetchCurrency(data));
+}
+
+function fetchAvailableCurrency() {
+  return fetch(
+    "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5"
+  ).then((response) => response.json());
+}
 
 // MUST export default a function called reducer()
 // MUST export its action creators as functions
