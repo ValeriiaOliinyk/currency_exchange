@@ -10,7 +10,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import createSagaMiddleware from "redux-saga";
-import { currencyReducer } from "./currency/currency-reducers";
+import { currencyReducer, favoriteReducer } from "./currency/currency-reducers";
 import { sagaWatcher } from "./currency/currency-reducers";
 
 const saga = createSagaMiddleware();
@@ -28,6 +28,7 @@ const middleware = [
 const store = configureStore({
   reducer: {
     currency: currencyReducer,
+    favorite: favoriteReducer,
   },
   middleware,
   devTools: process.env.NODE_ENV === "development",

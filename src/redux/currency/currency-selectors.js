@@ -7,13 +7,6 @@ export const getCurrencyArray = (state) => {
   }
 };
 
-export const getAvailableCurrencies = (state) => {
-  const currency = getCurrency(state);
-  if (currency.rates) {
-    return Object.entries(currency.rates);
-  }
-};
-
 export const getFromCurrency = (state) => {
   const currency = getCurrency(state);
   if (currency.base) {
@@ -35,3 +28,6 @@ export const getExchangeRate = (state) => {
     return currency.rates[firstCurrency];
   }
 };
+
+export const getFavorites = (state) => state.favorite;
+export const getNumberOfFavorites = (state) => state.favorite.length;

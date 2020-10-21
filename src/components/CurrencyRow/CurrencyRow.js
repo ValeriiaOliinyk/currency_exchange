@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   getCurrencyArray,
   getFromCurrency,
   getToCurrency,
   getExchangeRate,
-  getAvailableCurrencies,
 } from "../../redux/currency/currency-selectors";
-import { useDispatch } from "react-redux";
 import { loadData } from "../../redux/currency/currency-reducers";
+import axios from "axios";
+
+const BASE_URL = "https://api.exchangeratesapi.io/latest";
 
 export default function CurrencyRow() {
   const dispatch = useDispatch();
@@ -21,35 +22,38 @@ export default function CurrencyRow() {
   const selectedFromCurrency = useSelector(getFromCurrency);
   const selectedToCurrency = useSelector(getToCurrency);
   const selectedExchangeRate = useSelector(getExchangeRate);
-  const availableCurrencies = useSelector(getAvailableCurrencies);
-  const [fromCurrency, setFromCurrency] = useState(selectedFromCurrency);
-  const [toCurrency, setToCurrency] = useState(selectedToCurrency);
-  const [exchangeRate, setExchangeRate] = useState(121);
+  const [fromCurrency, setFromCurrency] = useState("");
+  const [toCurrency, setToCurrency] = useState("");
+  const [exchangeRate, setExchangeRate] = useState();
   const [amount, setAmount] = useState(1);
   const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
 
-  // if (fromCurrency !== selectedFromCurrency) {
-  //   const newExchangeRate = availableCurrencies.find((item) =>
-  //     item.includes(fromCurrency)
-  //   );
-
-  //   if (newExchangeRate) {
-  //     setExchangeRate(newExchangeRate[1]);
-  //   }
-  // }
+  useEffect(() => {
+    if (selectedFromCurrency && selectedToCurrency) {
+      setFromCurrency(selectedFromCurrency);
+      setToCurrency(selectedToCurrency[0]);
+      setExchangeRate(selectedExchangeRate);
+    }
+  }, [selectedExchangeRate, selectedFromCurrency, selectedToCurrency]);
 
   let fromAmount = null;
   let toAmount = null;
 
-  if (amountInFromCurrency && exchangeRate) {
+  if (amountInFromCurrency) {
     fromAmount = amount;
-    toAmount = amount * exchangeRate;
+    toAmount = (amount * exchangeRate).toFixed(2);
+  } else {
+    toAmount = amount;
+    fromAmount = (amount / exchangeRate).toFixed(2);
   }
 
-  if (!amountInFromCurrency && exchangeRate) {
-    fromAmount = amount;
-    toAmount = amount / exchangeRate;
-  }
+  useEffect(() => {
+    if (fromCurrency !== undefined && toCurrency !== undefined) {
+      axios(
+        `${BASE_URL}?base=${fromCurrency}&symbols=${toCurrency}`
+      ).then(({ data }) => setExchangeRate(data.rates[toCurrency]));
+    }
+  }, [fromCurrency, toCurrency]);
 
   const handleFromAmountChange = (e) => {
     setAmount(e.target.value);
