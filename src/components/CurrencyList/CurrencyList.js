@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  getCurrencyArray,
   getFavorites,
   getNumberOfFavorites,
+  getRegularCurrency,
 } from "../../redux/currency/currency-selectors";
 import {
   addFavorite,
@@ -15,8 +15,8 @@ import MainLoader from "../MainLoader/MainLoader";
 
 const CurrencyList = () => {
   const dispatch = useDispatch(addFavorite);
-  const currency = useSelector(getCurrencyArray);
   const favorites = useSelector(getFavorites);
+  const regularCurrency = useSelector(getRegularCurrency);
   const numberOfFavorites = useSelector(getNumberOfFavorites);
 
   const toggleFavAction = (text) => {
@@ -29,13 +29,25 @@ const CurrencyList = () => {
     }
   };
 
-  console.log(favorites);
-
   return (
     <ul>
       <div>Favorite currencies: {numberOfFavorites}</div>
-      {currency ? (
-        currency.map((item) => (
+      {favorites ? (
+        favorites.map((item) => (
+          <li key={item}>
+            <>
+              <p>{item}</p>
+              <button type="button" onClick={() => toggleFavAction(item)}>
+                Favorite
+              </button>
+            </>
+          </li>
+        ))
+      ) : (
+        <MainLoader />
+      )}
+      {regularCurrency ? (
+        regularCurrency.map((item) => (
           <li key={item}>
             <>
               <p>{item}</p>

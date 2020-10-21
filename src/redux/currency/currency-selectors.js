@@ -31,3 +31,10 @@ export const getExchangeRate = (state) => {
 
 export const getFavorites = (state) => state.favorite;
 export const getNumberOfFavorites = (state) => state.favorite.length;
+export const getRegularCurrency = (state) => {
+  const currency = getCurrencyArray(state);
+  const favorites = getFavorites(state);
+  if (currency) {
+    return currency.filter((n) => favorites.indexOf(n) === -1);
+  }
+};
