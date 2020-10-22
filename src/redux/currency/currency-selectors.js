@@ -17,15 +17,7 @@ export const getFromCurrency = (state) => {
 export const getToCurrency = (state) => {
   const currency = getCurrency(state);
   if (currency.rates) {
-    return [Object.keys(currency.rates)[0]];
-  }
-};
-
-export const getExchangeRate = (state) => {
-  const currency = getCurrency(state);
-  const firstCurrency = getToCurrency(state);
-  if (currency && firstCurrency) {
-    return currency.rates[firstCurrency];
+    return Object.keys(currency.rates)[0];
   }
 };
 
@@ -38,3 +30,6 @@ export const getRegularCurrency = (state) => {
     return currency.filter((n) => favorites.indexOf(n) === -1);
   }
 };
+
+export const getExchangeRate = (state) => state.rate;
+export const getDataUrl = (state) => state.data;

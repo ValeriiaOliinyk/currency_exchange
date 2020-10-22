@@ -1,4 +1,5 @@
 import React from "react";
+
 import { useSelector, useDispatch } from "react-redux";
 import {
   getFavorites,
@@ -12,6 +13,7 @@ import {
 
 // Components
 import MainLoader from "../MainLoader/MainLoader";
+import { Button } from "react-bootstrap";
 
 const CurrencyList = () => {
   const dispatch = useDispatch();
@@ -30,37 +32,40 @@ const CurrencyList = () => {
   };
 
   return (
-    <ul>
-      <div>Favorite currencies: {numberOfFavorites}</div>
-      {favorites ? (
-        favorites.map((item) => (
-          <li key={item}>
-            <>
-              <p>{item}</p>
-              <button type="button" onClick={() => toggleFavAction(item)}>
-                Favorite
-              </button>
-            </>
-          </li>
-        ))
-      ) : (
-        <MainLoader />
-      )}
-      {regularCurrency ? (
-        regularCurrency.map((item) => (
-          <li key={item}>
-            <>
-              <p>{item}</p>
-              <button type="button" onClick={() => toggleFavAction(item)}>
-                Favorite
-              </button>
-            </>
-          </li>
-        ))
-      ) : (
-        <MainLoader />
-      )}
-    </ul>
+    <>
+      <ul>
+        <div>Favorite currencies: {numberOfFavorites}</div>
+        {favorites ? (
+          favorites.map((item) => (
+            <li key={item}>
+              <>
+                <p>{item}</p>
+                <button type="button" onClick={() => toggleFavAction(item)}>
+                  Favorite
+                </button>
+              </>
+            </li>
+          ))
+        ) : (
+          <MainLoader />
+        )}
+        {regularCurrency ? (
+          regularCurrency.map((item) => (
+            <li key={item}>
+              <>
+                <p>{item}</p>
+                <button type="button" onClick={() => toggleFavAction(item)}>
+                  Favorite
+                </button>
+              </>
+            </li>
+          ))
+        ) : (
+          <MainLoader />
+        )}
+      </ul>
+      <Button>Test</Button>
+    </>
   );
 };
 

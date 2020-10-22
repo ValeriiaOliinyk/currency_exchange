@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import routes from "./routes";
 import "./styles/base.scss";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 // Components
 import Navigation from "./components/Navigation/Navigation";
