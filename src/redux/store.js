@@ -16,7 +16,11 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import createSagaMiddleware from "redux-saga";
-import { currencyReducer, favoriteReducer } from "./currency/currency-reducers";
+import {
+  currencyReducer,
+  favoriteReducer,
+  updateDataReducer,
+} from "./currency/currency-reducers";
 import { sagaWatcher } from "./currency/currency-reducers";
 
 const saga = createSagaMiddleware();
@@ -40,6 +44,7 @@ const middleware = [
 const rootReducer = combineReducers({
   currency: currencyReducer,
   favorite: favoriteReducer,
+  data: updateDataReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

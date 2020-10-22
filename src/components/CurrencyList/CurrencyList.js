@@ -14,7 +14,7 @@ import {
 import MainLoader from "../MainLoader/MainLoader";
 
 const CurrencyList = () => {
-  const dispatch = useDispatch(addFavorite);
+  const dispatch = useDispatch();
   const favorites = useSelector(getFavorites);
   const regularCurrency = useSelector(getRegularCurrency);
   const numberOfFavorites = useSelector(getNumberOfFavorites);

@@ -6,7 +6,7 @@ import {
   getToCurrency,
   getExchangeRate,
 } from "../../redux/currency/currency-selectors";
-import { loadData } from "../../redux/currency/currency-reducers";
+import { loadData, updateData } from "../../redux/currency/currency-reducers";
 import axios from "axios";
 
 const BASE_URL = "https://api.exchangeratesapi.io/latest";
@@ -14,19 +14,20 @@ const BASE_URL = "https://api.exchangeratesapi.io/latest";
 export default function CurrencyRow() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(loadData());
-  }, [dispatch]);
-
   const currency = useSelector(getCurrencyArray);
   const selectedFromCurrency = useSelector(getFromCurrency);
   const selectedToCurrency = useSelector(getToCurrency);
   const selectedExchangeRate = useSelector(getExchangeRate);
+
   const [fromCurrency, setFromCurrency] = useState("");
   const [toCurrency, setToCurrency] = useState("");
-  const [exchangeRate, setExchangeRate] = useState();
+  const [exchangeRate, setExchangeRate] = useState(0);
   const [amount, setAmount] = useState(1);
   const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
+
+  useEffect(() => {
+    dispatch(loadData());
+  }, [dispatch]);
 
   useEffect(() => {
     if (selectedFromCurrency && selectedToCurrency) {
@@ -41,19 +42,11 @@ export default function CurrencyRow() {
 
   if (amountInFromCurrency) {
     fromAmount = amount;
-    toAmount = (amount * exchangeRate).toFixed(2);
+    toAmount = (amount * exchangeRate).toFixed(1);
   } else {
     toAmount = amount;
-    fromAmount = (amount / exchangeRate).toFixed(2);
+    fromAmount = (amount / exchangeRate).toFixed(1);
   }
-
-  useEffect(() => {
-    if (fromCurrency !== undefined && toCurrency !== undefined) {
-      axios(
-        `${BASE_URL}?base=${fromCurrency}&symbols=${toCurrency}`
-      ).then(({ data }) => setExchangeRate(data.rates[toCurrency]));
-    }
-  }, [fromCurrency, toCurrency]);
 
   const handleFromAmountChange = (e) => {
     setAmount(e.target.value);
@@ -64,6 +57,15 @@ export default function CurrencyRow() {
     setAmount(e.target.value);
     setAmountInFromCurrency(false);
   };
+
+  useEffect(() => {
+    if (fromCurrency && toCurrency) {
+      axios(`${BASE_URL}?base=${fromCurrency}&symbols=${toCurrency}`)
+        .then(({ data }) => setExchangeRate(data.rates[toCurrency]))
+        .catch((error) => console.log(error));
+    }
+    dispatch(updateData(fromCurrency, toCurrency));
+  }, [dispatch, fromCurrency, toCurrency]);
 
   return (
     <div>

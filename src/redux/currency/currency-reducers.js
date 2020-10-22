@@ -6,6 +6,7 @@ export const FETCH_CURRENCY = "GET_CURRENCY";
 export const LOAD_DATA = "LOAD_DATA";
 export const ADD_FAV = "ADD_FAV";
 export const DELETE_FAV = "DELETE_FAV";
+export const UPDATE_DATA = "UPDATE_DATA";
 
 // Actions
 
@@ -36,11 +37,18 @@ export function deleteFavorite(text) {
   };
 }
 
+export function updateData(fromCurrency, toCurrency) {
+  return {
+    type: UPDATE_DATA,
+    payload: { fromCurrency, toCurrency },
+  };
+}
+
+// Reducers
+
 const initialState = {
   currencyTypes: [],
 };
-
-// Reducers
 
 export const currencyReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -62,6 +70,15 @@ export const favoriteReducer = (state = [], action) => {
   }
 };
 
+export const updateDataReducer = (state = {}, action) => {
+  switch (action.type) {
+    case UPDATE_DATA:
+      return [action.payload];
+    default:
+      return state;
+  }
+};
+
 // Saga
 
 export function* sagaWatcher() {
@@ -76,8 +93,3 @@ function* sagaWorker() {
 function fetchAvailableCurrency() {
   return fetch(BASE_URL).then((response) => response.json());
 }
-
-// MUST export default a function called reducer()
-// MUST export its action creators as functions
-// MUST have action types in the form npm-module-or-app/reducer/ACTION_TYPE
-// MAY export its action types as UPPER_SNAKE_CASE, if an external reducer needs to listen for them, or if it is a published reusable library
