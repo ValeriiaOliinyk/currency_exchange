@@ -1,0 +1,28 @@
+{
+  "files": {
+    "currency-page.js": "/currency_exchange/static/js/currency-page.28797b0f.chunk.js",
+    "currency-page.js.map": "/currency_exchange/static/js/currency-page.28797b0f.chunk.js.map",
+    "home-page.js": "/currency_exchange/static/js/home-page.cfc07b74.chunk.js",
+    "home-page.js.map": "/currency_exchange/static/js/home-page.cfc07b74.chunk.js.map",
+    "main.css": "/currency_exchange/static/css/main.bb4ebea3.chunk.css",
+    "main.js": "/currency_exchange/static/js/main.0a2a7ea2.chunk.js",
+    "main.js.map": "/currency_exchange/static/js/main.0a2a7ea2.chunk.js.map",
+    "runtime-main.js": "/currency_exchange/static/js/runtime-main.7d29ca78.js",
+    "runtime-main.js.map": "/currency_exchange/static/js/runtime-main.7d29ca78.js.map",
+    "static/js/4.7ed11c3c.chunk.js": "/currency_exchange/static/js/4.7ed11c3c.chunk.js",
+    "static/js/4.7ed11c3c.chunk.js.map": "/currency_exchange/static/js/4.7ed11c3c.chunk.js.map",
+    "static/js/5.41247c7c.chunk.js": "/currency_exchange/static/js/5.41247c7c.chunk.js",
+    "static/js/5.41247c7c.chunk.js.map": "/currency_exchange/static/js/5.41247c7c.chunk.js.map",
+    "index.html": "/currency_exchange/index.html",
+    "precache-manifest.a3cbf309e3577d1deef18cf952d4653e.js": "/currency_exchange/precache-manifest.a3cbf309e3577d1deef18cf952d4653e.js",
+    "service-worker.js": "/currency_exchange/service-worker.js",
+    "static/css/main.bb4ebea3.chunk.css.map": "/currency_exchange/static/css/main.bb4ebea3.chunk.css.map",
+    "static/js/4.7ed11c3c.chunk.js.LICENSE.txt": "/currency_exchange/static/js/4.7ed11c3c.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7d29ca78.js",
+    "static/js/4.7ed11c3c.chunk.js",
+    "static/css/main.bb4ebea3.chunk.css",
+    "static/js/main.0a2a7ea2.chunk.js"
+  ]
+}
