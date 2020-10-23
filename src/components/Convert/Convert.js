@@ -1,11 +1,11 @@
 import React from "react";
 import CurrencyRow from "../CurrencyRow/CurrencyRow";
-import "./Convert.scss";
+import Title from "../styled/Title";
 
 const Convert = () => {
   return (
     <>
-      <h2 className="Convert__title">Convert</h2>
+      <Title>Convert</Title>
       <CurrencyRow />
     </>
   );

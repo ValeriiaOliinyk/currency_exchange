@@ -4,6 +4,7 @@ import { loadData } from "../../redux/currency/currency-reducers";
 
 // Components
 import CurrencyList from "../../components/CurrencyList/CurrencyList";
+import MainTitle from "../../components/styled/MainTitle";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const Home = () => {
   return (
     <main>
       <section>
-        <h1>Quickly Convert</h1>
+        <MainTitle>Quickly Convert</MainTitle>
         <p>List of available currencies</p>
         <CurrencyList />
       </section>

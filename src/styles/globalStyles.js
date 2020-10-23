@@ -1,3 +1,6 @@
+import { createGlobalStyle } from "styled-components";
+
+const GlobalStyle = createGlobalStyle`
 html {
   box-sizing: border-box;
 }
@@ -26,3 +29,6 @@ ul {
 *::after {
   box-sizing: inherit;
 }
+`;
+
+export default GlobalStyle;

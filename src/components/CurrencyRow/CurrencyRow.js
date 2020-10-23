@@ -14,9 +14,16 @@ import {
 } from "../../redux/currency/currency-reducers";
 import axios from "axios";
 
+// Components
+import FormBox from "../styled/FormBox";
+import Option from "../styled/Option";
+import FormEqually from "../styled/FormEqually";
+import FormCurrency from "../styled/FormCurrency";
+import FormControl from "../styled/FormControl";
+import FormSelect from "../styled/FormSelect";
+
 // Styles
-import { Form, Container } from "react-bootstrap";
-import "./CurrencyRow.scss";
+import { Container } from "react-bootstrap";
 
 const BASE_URL = "https://api.exchangeratesapi.io/latest";
 
@@ -73,15 +80,15 @@ export default function CurrencyRow() {
 
   return (
     <Container>
-      <Form className="Form">
-        <div className="Form__box">
-          <Form.Control
+      <FormCurrency>
+        <FormBox>
+          <FormControl
             type="number"
             value={fromAmount}
             onChange={handleFromAmountChange}
             className="Form__input"
           />
-          <Form.Control
+          <FormSelect
             as="select"
             value={fromCurrency}
             onChange={(e) => setFromCurrency(e.target.value)}
@@ -89,21 +96,21 @@ export default function CurrencyRow() {
           >
             {currency &&
               currency.map((item) => (
-                <option key={item} value={item}>
+                <Option key={item} value={item}>
                   {item}
-                </option>
+                </Option>
               ))}
-          </Form.Control>
-        </div>
-        <div className="Form__equally">=</div>
-        <div className="Form__box">
-          <Form.Control
+          </FormSelect>
+        </FormBox>
+        <FormEqually>=</FormEqually>
+        <FormBox>
+          <FormControl
             type="number"
             value={toAmount}
             onChange={handleToAmountChange}
             className="Form__input"
           />
-          <Form.Control
+          <FormSelect
             as="select"
             value={toCurrency}
             onChange={(e) => setToCurrency(e.target.value)}
@@ -111,13 +118,13 @@ export default function CurrencyRow() {
           >
             {currency &&
               currency.map((item) => (
-                <option key={item} value={item}>
+                <Option key={item} value={item}>
                   {item}
-                </option>
+                </Option>
               ))}
-          </Form.Control>
-        </div>
-      </Form>
+          </FormSelect>
+        </FormBox>
+      </FormCurrency>
     </Container>
   );
 }
