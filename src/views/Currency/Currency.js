@@ -4,11 +4,7 @@ import React from "react";
 import Convert from "../../components/Convert/Convert";
 
 const Currency = () => {
-  return (
-    <>
-      <Convert />
-    </>
-  );
+  return <Convert />;
 };
 
 export default Currency;

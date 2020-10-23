@@ -3,8 +3,8 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getFavorites,
-  getNumberOfFavorites,
   getRegularCurrency,
+  getNumberOfFavorites,
 } from "../../redux/currency/currency-selectors";
 import {
   addFavorite,
@@ -13,6 +13,11 @@ import {
 
 // Components
 import MainLoader from "../MainLoader/MainLoader";
+import Empty from "../Empty/Empty";
+import ListFavorite from "../styled/ListFavorite";
+import BtnFavorite from "../styled/BtnFavorite";
+import BtnEmpty from "../styled/BtnEmpty";
+import ItemFavorites from "../styled/ItemFavorites";
 
 const CurrencyList = () => {
   const dispatch = useDispatch();
@@ -32,37 +37,40 @@ const CurrencyList = () => {
 
   return (
     <>
-      <ul>
-        <div>Favorite currencies: {numberOfFavorites}</div>
-        {favorites ? (
+      <ListFavorite>
+        {numberOfFavorites > 0 ? (
           favorites.map((item) => (
-            <li key={item}>
+            <ItemFavorites key={item}>
               <>
                 <p>{item}</p>
-                <button type="button" onClick={() => toggleFavAction(item)}>
-                  Favorite
-                </button>
+                <BtnFavorite
+                  type="button"
+                  onClick={() => toggleFavAction(item)}
+                ></BtnFavorite>
               </>
-            </li>
+            </ItemFavorites>
           ))
         ) : (
-          <MainLoader />
+          <Empty />
         )}
+      </ListFavorite>
+      <ListFavorite>
         {regularCurrency ? (
           regularCurrency.map((item) => (
-            <li key={item}>
+            <ItemFavorites key={item}>
               <>
                 <p>{item}</p>
-                <button type="button" onClick={() => toggleFavAction(item)}>
-                  Favorite
-                </button>
+                <BtnEmpty
+                  type="button"
+                  onClick={() => toggleFavAction(item)}
+                ></BtnEmpty>
               </>
-            </li>
+            </ItemFavorites>
           ))
         ) : (
           <MainLoader />
         )}
-      </ul>
+      </ListFavorite>
     </>
   );
 };
