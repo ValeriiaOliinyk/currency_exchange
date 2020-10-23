@@ -3,9 +3,9 @@ import styled from "styled-components";
 export default styled.ul`
   margin: auto;
   margin-top: 20px;
-  background-color: teal;
-  border-radius: 20px;
-  width: 80%;
+  width: 60%;
   text-align: center;
   padding: 20px;
+  padding-bottom: 30px;
+  border-bottom: ${(props) => props.favorite && "4px dashed #ffc107"};
 `;

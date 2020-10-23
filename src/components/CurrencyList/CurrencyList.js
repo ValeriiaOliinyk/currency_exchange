@@ -18,6 +18,8 @@ import ListFavorite from "../styled/ListFavorite";
 import BtnFavorite from "../styled/BtnFavorite";
 import BtnEmpty from "../styled/BtnEmpty";
 import ItemFavorites from "../styled/ItemFavorites";
+import ItemContainer from "../styled/ItemContainer";
+import Value from "../styled/Value";
 
 const CurrencyList = () => {
   const dispatch = useDispatch();
@@ -37,17 +39,17 @@ const CurrencyList = () => {
 
   return (
     <>
-      <ListFavorite>
+      <ListFavorite favorite>
         {numberOfFavorites > 0 ? (
           favorites.map((item) => (
             <ItemFavorites key={item}>
-              <>
-                <p>{item}</p>
+              <ItemContainer>
+                <Value>{item}</Value>
                 <BtnFavorite
                   type="button"
                   onClick={() => toggleFavAction(item)}
                 ></BtnFavorite>
-              </>
+              </ItemContainer>
             </ItemFavorites>
           ))
         ) : (
@@ -58,13 +60,13 @@ const CurrencyList = () => {
         {regularCurrency ? (
           regularCurrency.map((item) => (
             <ItemFavorites key={item}>
-              <>
-                <p>{item}</p>
+              <ItemContainer>
+                <Value>{item}</Value>
                 <BtnEmpty
                   type="button"
                   onClick={() => toggleFavAction(item)}
                 ></BtnEmpty>
-              </>
+              </ItemContainer>
             </ItemFavorites>
           ))
         ) : (

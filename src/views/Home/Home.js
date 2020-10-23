@@ -23,7 +23,7 @@ const Home = () => {
       <Container>
         <MainTitle>Quickly Convert</MainTitle>
         <TitleHome>List of available currencies</TitleHome>
-        <Favorite>Favorite currencies: {numberOfFavorites}</Favorite>
+        <Favorite>{numberOfFavorites}</Favorite>
         <CurrencyList />
       </Container>
     </main>
