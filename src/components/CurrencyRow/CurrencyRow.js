@@ -6,12 +6,10 @@ import {
   getToCurrency,
   getExchangeRate,
 } from "../../redux/currency/currency-selectors";
-import {
-  loadData,
-  loadDataUrl,
-  updateData,
-  addExchangeRate,
-} from "../../redux/currency/currency-reducers";
+import { addExchangeRate } from "../../redux/currency/currency-reducers";
+import { updateData } from "../../redux/currency/dataUrl-reducer";
+import { loadData } from "../../redux/currency/fetch-reducer";
+import PropTypes from "prop-types";
 import axios from "axios";
 
 // Components
@@ -27,7 +25,7 @@ import { Container } from "react-bootstrap";
 
 const BASE_URL = "https://api.exchangeratesapi.io/latest";
 
-export default function CurrencyRow() {
+const CurrencyRow = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadData());
@@ -46,6 +44,15 @@ export default function CurrencyRow() {
   useEffect(() => {
     setExchangeRate(selectedExchangeRate);
   }, [selectedExchangeRate]);
+
+  useEffect(() => {
+    if (fromCurrency && toCurrency) {
+      axios(`${BASE_URL}?base=${fromCurrency}&symbols=${toCurrency}`)
+        .then(({ data }) => dispatch(addExchangeRate(data.rates[toCurrency])))
+        .catch((error) => console.log(error));
+    }
+    dispatch(updateData(`?base=${fromCurrency}&symbols=${toCurrency}`));
+  }, [dispatch, fromCurrency, toCurrency]);
 
   let fromAmount = null;
   let toAmount = null;
@@ -67,16 +74,6 @@ export default function CurrencyRow() {
     setAmount(e.target.value);
     setAmountInFromCurrency(false);
   };
-
-  useEffect(() => {
-    if (fromCurrency && toCurrency) {
-      axios(`${BASE_URL}?base=${fromCurrency}&symbols=${toCurrency}`)
-        .then(({ data }) => dispatch(addExchangeRate(data.rates[toCurrency])))
-        .catch((error) => console.log(error));
-    }
-    dispatch(updateData(`?base=${fromCurrency}&symbols=${toCurrency}`));
-    dispatch(loadDataUrl());
-  }, [dispatch, fromCurrency, toCurrency]);
 
   return (
     <Container>
@@ -127,4 +124,20 @@ export default function CurrencyRow() {
       </FormCurrency>
     </Container>
   );
-}
+};
+
+CurrencyRow.defaultProps = {
+  currency: [],
+  selectedFromCurrency: "",
+  selectedToCurrency: "",
+  selectedExchangeRate: 0,
+};
+
+CurrencyRow.propTypes = {
+  currency: PropTypes.arrayOf(PropTypes.string),
+  selectedFromCurrency: PropTypes.string,
+  selectedToCurrency: PropTypes.string,
+  selectedExchangeRate: PropTypes.number,
+};
+
+export default CurrencyRow;

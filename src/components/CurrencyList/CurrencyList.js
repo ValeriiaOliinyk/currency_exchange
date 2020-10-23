@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -9,7 +10,7 @@ import {
 import {
   addFavorite,
   deleteFavorite,
-} from "../../redux/currency/currency-reducers";
+} from "../../redux/currency/favorite-reducer";
 
 // Components
 import MainLoader from "../MainLoader/MainLoader";
@@ -75,6 +76,17 @@ const CurrencyList = () => {
       </ListFavorite>
     </>
   );
+};
+
+CurrencyList.defaultProps = {
+  numberOfFavorites: 0,
+  favorites: [],
+};
+
+CurrencyList.propTypes = {
+  numberOfFavorites: PropTypes.number,
+  favorites: PropTypes.arrayOf(PropTypes.string),
+  regularCurrency: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default CurrencyList;
