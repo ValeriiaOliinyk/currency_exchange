@@ -13,7 +13,6 @@ import {
 
 // Components
 import MainLoader from "../MainLoader/MainLoader";
-import { Button } from "react-bootstrap";
 
 const CurrencyList = () => {
   const dispatch = useDispatch();
@@ -64,7 +63,6 @@ const CurrencyList = () => {
           <MainLoader />
         )}
       </ul>
-      <Button>Test</Button>
     </>
   );
 };

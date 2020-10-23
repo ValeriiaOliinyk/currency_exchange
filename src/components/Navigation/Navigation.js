@@ -1,34 +1,29 @@
 import React from "react";
 import routes from "../../routes";
-import { NavLink } from "react-router-dom";
-import "./Navigation.scss";
+
+// Components
+import Header from "../styled/Header";
+import Nav from "../styled/Nav";
+import NavigationList from "../styled/NavigationList";
+import NavigationItems from "../styled/NavigationItems";
+import Logo from "../styled/Logo";
+import NavLink from "../styled/NavLink";
 
 const Navigation = () => {
   return (
-    <header>
-      <nav>
-        <ul className="Navigation__list">
-          <li>
-            <NavLink
-              className="Navigation__link"
-              activeClassName="Navigation__active"
-              to={routes.home}
-            >
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className="Navigation__link"
-              activeClassName="Navigation__active"
-              to={routes.currency}
-            >
-              Convert
-            </NavLink>
-          </li>
-        </ul>
-      </nav>
-    </header>
+    <Header>
+      <Nav>
+        <Logo></Logo>
+        <NavigationList>
+          <NavigationItems>
+            <NavLink to={routes.home}>Home</NavLink>
+          </NavigationItems>
+          <NavigationItems>
+            <NavLink to={routes.currency}>Convert</NavLink>
+          </NavigationItems>
+        </NavigationList>
+      </Nav>
+    </Header>
   );
 };
 

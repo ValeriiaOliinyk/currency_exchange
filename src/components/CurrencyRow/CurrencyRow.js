@@ -102,7 +102,7 @@ export default function CurrencyRow() {
               ))}
           </FormSelect>
         </FormBox>
-        <FormEqually>=</FormEqually>
+        <FormEqually></FormEqually>
         <FormBox>
           <FormControl
             type="number"

@@ -3,8 +3,8 @@ import { Form } from "react-bootstrap";
 
 export default styled(Form)`
   margin: auto;
-  width: 500px;
-  height: 180px;
+  width: 50%;
+  height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
