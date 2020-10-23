@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/currency_exchange/precache-manifest.e5030a1638577c7184c5a108d54e3e12.js"
+  "/currency_exchange/precache-manifest.ca41965f10930cc0ddce96e50a1816fc.js"
 );
 
 self.addEventListener('message', (event) => {
