@@ -57,8 +57,8 @@ const CurrencyRow = () => {
       axios(`${BASE_URL}?base=${fromCurrency}&symbols=${toCurrency}`)
         .then(({ data }) => dispatch(addExchangeRate(data.rates[toCurrency])))
         .catch((error) => console.log(error));
+      // dispatch(addExchangeRate(updatedData.rates[toCurrency]));
     }
-    // dispatch(addExchangeRate(updatedData.rates[toCurrency]));
   }, [dispatch, fromCurrency, toCurrency]);
 
   let fromAmount = null;

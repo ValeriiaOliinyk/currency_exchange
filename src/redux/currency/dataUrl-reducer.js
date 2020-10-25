@@ -59,8 +59,8 @@
 
 // function* updateCurrency() {
 //   let { from, to } = yield select(getDataUrl);
-
-//   if (from !== "undefined" && to && "undefined") {
+//   console.log(`From ${from} To ${to}`);
+//   if (from !== "undefined" && to) {
 //     return yield fetch(
 //       `${BASE_URL}?base=${from}&symbols=${to}`
 //     ).then((response) => response.json());
