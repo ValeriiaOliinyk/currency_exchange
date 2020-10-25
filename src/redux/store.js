@@ -21,7 +21,7 @@ import { updateDataReducer } from "./currency/dataUrl-reducer";
 import { favoriteReducer } from "./currency/favorite-reducer";
 import { currencyReducer } from "./currency/fetch-reducer";
 import { sagaWatcher } from "./currency/fetch-reducer";
-import { watchUpdateData } from "./currency/dataUrl-reducer";
+// import { watchUpdateData } from "./currency/dataUrl-reducer";
 import { putUpdatedDataReducer } from "./currency/dataUrl-reducer";
 
 const saga = createSagaMiddleware();
@@ -29,7 +29,7 @@ const saga = createSagaMiddleware();
 const persistConfig = {
   key: "favoritesList",
   storage,
-  blacklist: ["currency", "data", "rate"],
+  blacklist: ["currency", "data", "updatedData"],
 };
 
 const middleware = [

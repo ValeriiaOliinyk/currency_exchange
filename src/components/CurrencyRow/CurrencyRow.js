@@ -5,7 +5,7 @@ import {
   getFromCurrency,
   getToCurrency,
   getExchangeRate,
-  getUpdatedData,
+  // getUpdatedData,
 } from "../../redux/currency/currency-selectors";
 import { addExchangeRate } from "../../redux/currency/currency-reducers";
 // import { updateData } from "../../redux/currency/dataUrl-reducer";
@@ -36,12 +36,16 @@ const CurrencyRow = () => {
   const selectedFromCurrency = useSelector(getFromCurrency);
   const selectedToCurrency = useSelector(getToCurrency);
   const selectedExchangeRate = useSelector(getExchangeRate);
-  const updatedData = useSelector(getUpdatedData);
+  // const updatedData = useSelector(getUpdatedData);
   const [fromCurrency, setFromCurrency] = useState(selectedFromCurrency);
   const [toCurrency, setToCurrency] = useState(selectedToCurrency);
-  const [exchangeRate, setExchangeRate] = useState(0);
+  const [exchangeRate, setExchangeRate] = useState(selectedExchangeRate);
   const [amount, setAmount] = useState(1);
   const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
+
+  useEffect(() => {
+    setToCurrency(selectedToCurrency);
+  }, [selectedToCurrency]);
 
   useEffect(() => {
     setExchangeRate(selectedExchangeRate);
@@ -77,6 +81,8 @@ const CurrencyRow = () => {
     setAmount(e.target.value);
     setAmountInFromCurrency(false);
   };
+
+  console.log(exchangeRate);
 
   return (
     <Container>
