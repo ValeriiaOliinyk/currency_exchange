@@ -5,9 +5,10 @@ import {
   getFromCurrency,
   getToCurrency,
   getExchangeRate,
+  getUpdatedData,
 } from "../../redux/currency/currency-selectors";
 import { addExchangeRate } from "../../redux/currency/currency-reducers";
-import { updateData } from "../../redux/currency/dataUrl-reducer";
+// import { updateData } from "../../redux/currency/dataUrl-reducer";
 import { loadData } from "../../redux/currency/fetch-reducer";
 import PropTypes from "prop-types";
 import axios from "axios";
@@ -35,6 +36,7 @@ const CurrencyRow = () => {
   const selectedFromCurrency = useSelector(getFromCurrency);
   const selectedToCurrency = useSelector(getToCurrency);
   const selectedExchangeRate = useSelector(getExchangeRate);
+  const updatedData = useSelector(getUpdatedData);
   const [fromCurrency, setFromCurrency] = useState(selectedFromCurrency);
   const [toCurrency, setToCurrency] = useState(selectedToCurrency);
   const [exchangeRate, setExchangeRate] = useState(0);
@@ -46,12 +48,13 @@ const CurrencyRow = () => {
   }, [selectedExchangeRate]);
 
   useEffect(() => {
+    // dispatch(updateData(fromCurrency, toCurrency));
     if (fromCurrency && toCurrency) {
       axios(`${BASE_URL}?base=${fromCurrency}&symbols=${toCurrency}`)
         .then(({ data }) => dispatch(addExchangeRate(data.rates[toCurrency])))
         .catch((error) => console.log(error));
     }
-    dispatch(updateData(`?base=${fromCurrency}&symbols=${toCurrency}`));
+    // dispatch(addExchangeRate(updatedData.rates[toCurrency]));
   }, [dispatch, fromCurrency, toCurrency]);
 
   let fromAmount = null;

@@ -41,6 +41,6 @@ function* sagaWorker() {
   yield put(fetchCurrency(data));
 }
 
-function fetchAvailableCurrency() {
-  return fetch(BASE_URL).then((response) => response.json());
+function* fetchAvailableCurrency() {
+  return yield fetch(BASE_URL).then((response) => response.json());
 }

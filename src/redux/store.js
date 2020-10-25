@@ -21,6 +21,8 @@ import { updateDataReducer } from "./currency/dataUrl-reducer";
 import { favoriteReducer } from "./currency/favorite-reducer";
 import { currencyReducer } from "./currency/fetch-reducer";
 import { sagaWatcher } from "./currency/fetch-reducer";
+import { watchUpdateData } from "./currency/dataUrl-reducer";
+import { putUpdatedDataReducer } from "./currency/dataUrl-reducer";
 
 const saga = createSagaMiddleware();
 
@@ -45,6 +47,7 @@ const rootReducer = combineReducers({
   favorite: favoriteReducer,
   data: updateDataReducer,
   rate: exchangeRateReducer,
+  updatedData: putUpdatedDataReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -56,6 +59,7 @@ const store = configureStore({
 });
 
 saga.run(sagaWatcher);
+// saga.run(watchUpdateData);
 
 const persistor = persistStore(store);
 

@@ -33,3 +33,4 @@ export const getRegularCurrency = (state) => {
 
 export const getExchangeRate = (state) => state.rate;
 export const getDataUrl = (state) => state.data;
+export const getUpdatedData = (state) => state.updatedData;
