@@ -1,43 +1,43 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "bfbc81aa5c5bde1c54caf4a44eccea88",
+    "revision": "40ea06966154b819f4da1a602b2b4da9",
     "url": "/currency_exchange/index.html"
   },
   {
-    "revision": "0166c245de127f43c835",
+    "revision": "4d84c0fcbf77a340b6dc",
     "url": "/currency_exchange/static/css/4.2a86faee.chunk.css"
   },
   {
-    "revision": "0166c245de127f43c835",
-    "url": "/currency_exchange/static/js/4.e8efd3f4.chunk.js"
+    "revision": "4d84c0fcbf77a340b6dc",
+    "url": "/currency_exchange/static/js/4.edec06fd.chunk.js"
   },
   {
     "revision": "9b318b6fb13190fe82c0677e9264b3c7",
-    "url": "/currency_exchange/static/js/4.e8efd3f4.chunk.js.LICENSE.txt"
+    "url": "/currency_exchange/static/js/4.edec06fd.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "7a80e17d7ec9d32efa25",
-    "url": "/currency_exchange/static/js/5.fc89267f.chunk.js"
+    "revision": "ff695435fb933aa35871",
+    "url": "/currency_exchange/static/js/5.73f55779.chunk.js"
   },
   {
     "revision": "81896c98bac7b5b16ab1d3790da5b937",
-    "url": "/currency_exchange/static/js/5.fc89267f.chunk.js.LICENSE.txt"
+    "url": "/currency_exchange/static/js/5.73f55779.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "239259faee634e805f89",
-    "url": "/currency_exchange/static/js/currency-page.d2aaaf0d.chunk.js"
+    "revision": "b99062b390c61f0d061a",
+    "url": "/currency_exchange/static/js/currency-page.29bf663a.chunk.js"
   },
   {
-    "revision": "40c390fdb73001117659",
-    "url": "/currency_exchange/static/js/home-page.c8ebdc0a.chunk.js"
+    "revision": "e28f4004289800c61c33",
+    "url": "/currency_exchange/static/js/home-page.62d17a5d.chunk.js"
   },
   {
-    "revision": "21ab0950f50ac5580fdc",
-    "url": "/currency_exchange/static/js/main.f9cc76fc.chunk.js"
+    "revision": "2d6bd23fe5663b037c19",
+    "url": "/currency_exchange/static/js/main.73c5845f.chunk.js"
   },
   {
-    "revision": "9cd759ce960250a9a265",
-    "url": "/currency_exchange/static/js/runtime-main.fd7fdef2.js"
+    "revision": "d070932947e96c15526c",
+    "url": "/currency_exchange/static/js/runtime-main.f3419f85.js"
   },
   {
     "revision": "ef66f09e029214ae9d30a6a363baeb36",
