@@ -93,13 +93,6 @@ export function updateData(first, second) {
   };
 }
 
-export function fetchUpdatedCurrency(data) {
-  return {
-    type: FETCH_UPDATED_CURRENCY,
-    payload: data,
-  };
-}
-
 // Reducers
 
 export const exchangeRateReducer = (state = 0, action) => {
@@ -148,6 +141,13 @@ export const updateDataReducer = (state = updateState, action) => {
       return state;
   }
 };
+
+export function fetchUpdatedCurrency(data) {
+  return {
+    type: FETCH_UPDATED_CURRENCY,
+    payload: data,
+  };
+}
 
 export const putUpdatedDataReducer = (state = [], action) => {
   switch (action.type) {

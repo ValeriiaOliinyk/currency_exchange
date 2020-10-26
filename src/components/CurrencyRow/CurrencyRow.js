@@ -11,7 +11,6 @@ import {
   getUpdatedData,
 } from "../../redux/ducks/currency";
 import PropTypes from "prop-types";
-import axios from "axios";
 
 // Components
 import {
@@ -25,8 +24,6 @@ import {
 
 // Styles
 import { Container } from "react-bootstrap";
-
-const BASE_URL = "https://api.exchangeratesapi.io/latest";
 
 export function CurrencyRow() {
   const dispatch = useDispatch();
@@ -50,17 +47,19 @@ export function CurrencyRow() {
   }, [selectedToCurrency]);
 
   useEffect(() => {
-    setExchangeRate(selectedExchangeRate);
-  }, [selectedExchangeRate]);
+    if (updatedData.rates) {
+      setExchangeRate(updatedData.rates[toCurrency]);
+      // dispatch(addExchangeRate(updatedData.rates[toCurrency]));
+    }
+    // setExchangeRate(selectedExchangeRate);
+  }, [toCurrency, updatedData.rates]);
 
   useEffect(() => {
     if (fromCurrency && toCurrency) {
-      // console.log(dispatch(updateData(fromCurrency, toCurrency)));
-      // dispatch(updateData(fromCurrency, toCurrency));
-      axios(`${BASE_URL}?base=${fromCurrency}&symbols=${toCurrency}`)
-        .then(({ data }) => dispatch(addExchangeRate(data.rates[toCurrency])))
-        .catch((error) => console.log(error));
-      // dispatch(addExchangeRate(updatedData.rates[toCurrency]));
+      dispatch(updateData(fromCurrency, toCurrency));
+      // if (updatedData.rates) {
+      //   dispatch(addExchangeRate(updatedData.rates[toCurrency]));
+      // }
     }
   }, [dispatch, fromCurrency, toCurrency]);
 
@@ -85,7 +84,18 @@ export function CurrencyRow() {
     setAmountInFromCurrency(false);
   };
 
+  // const changeExchangeRate = (e) => {
+  //   // e.preventDefault();
+  //   if (updatedData.rates) {
+  //     setExchangeRate(updatedData.rates[toCurrency]);
+  //     // dispatch(addExchangeRate(updatedData.rates[toCurrency]));
+  //   }
+
+  //   console.log("Click");
+  // };
+
   console.log(exchangeRate);
+  console.log(updatedData);
 
   return (
     <Container>
@@ -99,6 +109,7 @@ export function CurrencyRow() {
           />
           <FormSelect
             as="select"
+            name="from"
             value={fromCurrency}
             onChange={(e) => setFromCurrency(e.target.value)}
             className="Form__select"
@@ -111,7 +122,7 @@ export function CurrencyRow() {
               ))}
           </FormSelect>
         </FormBox>
-        <FormEqually></FormEqually>
+
         <FormBox>
           <FormControl
             type="number"
@@ -133,6 +144,10 @@ export function CurrencyRow() {
               ))}
           </FormSelect>
         </FormBox>
+        {/* <FormEqually
+          type="submit"
+          onClick={(e) => changeExchangeRate(e)}
+        ></FormEqually> */}
       </FormCurrency>
     </Container>
   );
