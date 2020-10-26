@@ -4,8 +4,7 @@ import routes from "./routes";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // Components
-import Navigation from "./components/Navigation/Navigation";
-import MainLoader from "./components/MainLoader/MainLoader";
+import { Navigation, MainLoader } from "./components";
 
 // Views
 const Home = lazy(() =>
@@ -15,7 +14,7 @@ const Currency = lazy(() =>
   import("./views/Currency/Currency" /* webpackChunkName: "currency-page" */)
 );
 
-const App = () => {
+export default function App() {
   return (
     <>
       <Navigation />
@@ -28,6 +27,4 @@ const App = () => {
       </Suspense>
     </>
   );
-};
-
-export default App;
+}

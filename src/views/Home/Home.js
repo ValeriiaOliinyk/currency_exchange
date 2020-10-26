@@ -1,18 +1,13 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { loadData } from "../../redux/currency/fetch-reducer";
-import { getNumberOfFavorites } from "../../redux/currency/currency-selectors";
+import { loadData, getNumberOfFavorites } from "../../redux/ducks/currency";
 
 // Components
-import CurrencyList from "../../components/CurrencyList/CurrencyList";
-import MainTitle from "../../components/styled/MainTitle";
-import Container from "../../components/styled/Container";
-import Favorite from "../../components/styled/Favorite";
-import TitleHome from "../../components/styled/TitleHome";
-import Main from "../../components/styled/Main";
+import { CurrencyList } from "../../components";
+import { MainTitle, Container, Favorite, TitleHome, Main } from "../../styled";
 
-const Home = () => {
+export default function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,7 +25,7 @@ const Home = () => {
       </Container>
     </Main>
   );
-};
+}
 
 Home.defaultProps = {
   numberOfFavorites: 0,
@@ -39,5 +34,3 @@ Home.defaultProps = {
 Home.propTypes = {
   numberOfFavorites: PropTypes.number,
 };
-
-export default Home;

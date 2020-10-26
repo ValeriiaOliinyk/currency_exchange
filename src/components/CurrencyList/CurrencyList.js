@@ -1,28 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
-
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getFavorites,
-  getRegularCurrency,
-  getNumberOfFavorites,
-} from "../../redux/currency/currency-selectors";
 import {
   addFavorite,
   deleteFavorite,
-} from "../../redux/currency/favorite-reducer";
+  getFavorites,
+  getRegularCurrency,
+  getNumberOfFavorites,
+} from "../../redux/ducks/currency";
 
 // Components
-import MainLoader from "../MainLoader/MainLoader";
-import Empty from "../Empty/Empty";
-import ListFavorite from "../styled/ListFavorite";
-import BtnFavorite from "../styled/BtnFavorite";
-import BtnEmpty from "../styled/BtnEmpty";
-import ItemFavorites from "../styled/ItemFavorites";
-import ItemContainer from "../styled/ItemContainer";
-import Value from "../styled/Value";
+import { MainLoader, Empty } from "../../components";
+import {
+  ListFavorite,
+  BtnFavorite,
+  BtnEmpty,
+  ItemFavorites,
+  ItemContainer,
+  Value,
+} from "../../styled";
 
-const CurrencyList = () => {
+export function CurrencyList() {
   const dispatch = useDispatch();
   const favorites = useSelector(getFavorites);
   const regularCurrency = useSelector(getRegularCurrency);
@@ -76,7 +74,7 @@ const CurrencyList = () => {
       </ListFavorite>
     </>
   );
-};
+}
 
 CurrencyList.defaultProps = {
   numberOfFavorites: 0,
@@ -88,5 +86,3 @@ CurrencyList.propTypes = {
   favorites: PropTypes.arrayOf(PropTypes.string),
   regularCurrency: PropTypes.arrayOf(PropTypes.string),
 };
-
-export default CurrencyList;

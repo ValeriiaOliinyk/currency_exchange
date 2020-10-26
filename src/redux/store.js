@@ -16,14 +16,15 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import createSagaMiddleware from "redux-saga";
-import { exchangeRateReducer } from "./currency/currency-reducers";
-import { updateDataReducer } from "./currency/dataUrl-reducer";
-import { favoriteReducer } from "./currency/favorite-reducer";
-import { currencyReducer } from "./currency/fetch-reducer";
-import { sagaWatcher } from "./currency/fetch-reducer";
-// import { watchUpdateData } from "./currency/dataUrl-reducer";
-import { putUpdatedDataReducer } from "./currency/dataUrl-reducer";
-
+import {
+  exchangeRateReducer,
+  updateDataReducer,
+  favoriteReducer,
+  currencyReducer,
+  sagaWatcher,
+  putUpdatedDataReducer,
+  // watchUpdateData,
+} from "./ducks/currency";
 const saga = createSagaMiddleware();
 
 const persistConfig = {

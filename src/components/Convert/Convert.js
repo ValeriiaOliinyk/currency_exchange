@@ -1,17 +1,14 @@
 import React from "react";
 
 // Components
-import CurrencyRow from "../CurrencyRow/CurrencyRow";
-import Title from "../styled/Title";
-import Container from "../styled/Container";
+import { CurrencyRow } from "../../components";
+import { Title, Container } from "../../styled";
 
-const Convert = () => {
+export function Convert() {
   return (
     <Container>
       <Title>Convert</Title>
       <CurrencyRow />
     </Container>
   );
-};
-
-export default Convert;
+}

@@ -1,6 +1,7 @@
 import React from "react";
-import EmptyFavorites from "../styled/EmptyFavorites";
 
-const Empty = () => <EmptyFavorites>No favorite currencies</EmptyFavorites>;
+import { EmptyFavorites } from "../../styled";
 
-export default Empty;
+export const Empty = () => (
+  <EmptyFavorites>No favorite currencies</EmptyFavorites>
+);

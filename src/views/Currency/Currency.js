@@ -1,10 +1,8 @@
 import React from "react";
 
 // Components
-import Convert from "../../components/Convert/Convert";
+import { Convert } from "../../components";
 
-const Currency = () => {
+export default function Currency() {
   return <Convert />;
-};
-
-export default Currency;
+}

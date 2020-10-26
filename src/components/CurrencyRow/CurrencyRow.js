@@ -1,32 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  loadData,
+  addExchangeRate,
   getCurrencyArray,
   getFromCurrency,
   getToCurrency,
   getExchangeRate,
+  // updateData,
   // getUpdatedData,
-} from "../../redux/currency/currency-selectors";
-import { addExchangeRate } from "../../redux/currency/currency-reducers";
-// import { updateData } from "../../redux/currency/dataUrl-reducer";
-import { loadData } from "../../redux/currency/fetch-reducer";
+} from "../../redux/ducks/currency";
 import PropTypes from "prop-types";
 import axios from "axios";
 
 // Components
-import FormBox from "../styled/FormBox";
-import Option from "../styled/Option";
-import FormEqually from "../styled/FormEqually";
-import FormCurrency from "../styled/FormCurrency";
-import FormControl from "../styled/FormControl";
-import FormSelect from "../styled/FormSelect";
+import {
+  FormBox,
+  Option,
+  FormEqually,
+  FormCurrency,
+  FormControl,
+  FormSelect,
+} from "../../styled";
 
 // Styles
 import { Container } from "react-bootstrap";
 
 const BASE_URL = "https://api.exchangeratesapi.io/latest";
 
-const CurrencyRow = () => {
+export function CurrencyRow() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadData());
@@ -133,7 +135,7 @@ const CurrencyRow = () => {
       </FormCurrency>
     </Container>
   );
-};
+}
 
 CurrencyRow.defaultProps = {
   currency: [],
@@ -148,5 +150,3 @@ CurrencyRow.propTypes = {
   selectedToCurrency: PropTypes.string,
   selectedExchangeRate: PropTypes.number,
 };
-
-export default CurrencyRow;

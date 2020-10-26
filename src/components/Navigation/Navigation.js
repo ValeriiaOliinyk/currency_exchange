@@ -2,29 +2,29 @@ import React from "react";
 import routes from "../../routes";
 
 // Components
-import Header from "../styled/Header";
-import Nav from "../styled/Nav";
-import NavigationList from "../styled/NavigationList";
-import NavigationItems from "../styled/NavigationItems";
-import Logo from "../styled/Logo";
-import NavLink from "../styled/NavLink";
+import {
+  Header,
+  Nav,
+  NavigationList,
+  NavigationItems,
+  Logo,
+  NavLinks,
+} from "../../styled";
 
-const Navigation = () => {
+export function Navigation() {
   return (
     <Header>
       <Nav>
         <Logo></Logo>
         <NavigationList>
           <NavigationItems>
-            <NavLink to={routes.home}>Home</NavLink>
+            <NavLinks to={routes.home}>Home</NavLinks>
           </NavigationItems>
           <NavigationItems>
-            <NavLink to={routes.currency}>Convert</NavLink>
+            <NavLinks to={routes.currency}>Convert</NavLinks>
           </NavigationItems>
         </NavigationList>
       </Nav>
     </Header>
   );
-};
-
-export default Navigation;
+}
