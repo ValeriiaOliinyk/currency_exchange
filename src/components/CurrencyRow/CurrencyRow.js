@@ -7,8 +7,8 @@ import {
   getFromCurrency,
   getToCurrency,
   getExchangeRate,
-  // updateData,
-  // getUpdatedData,
+  updateData,
+  getUpdatedData,
 } from "../../redux/ducks/currency";
 import PropTypes from "prop-types";
 import axios from "axios";
@@ -38,7 +38,7 @@ export function CurrencyRow() {
   const selectedFromCurrency = useSelector(getFromCurrency);
   const selectedToCurrency = useSelector(getToCurrency);
   const selectedExchangeRate = useSelector(getExchangeRate);
-  // const updatedData = useSelector(getUpdatedData);
+  const updatedData = useSelector(getUpdatedData);
   const [fromCurrency, setFromCurrency] = useState(selectedFromCurrency);
   const [toCurrency, setToCurrency] = useState(selectedToCurrency);
   const [exchangeRate, setExchangeRate] = useState(selectedExchangeRate);
@@ -54,14 +54,16 @@ export function CurrencyRow() {
   }, [selectedExchangeRate]);
 
   useEffect(() => {
-    // dispatch(updateData(fromCurrency, toCurrency));
     if (fromCurrency && toCurrency) {
+      dispatch(updateData(fromCurrency, toCurrency));
       axios(`${BASE_URL}?base=${fromCurrency}&symbols=${toCurrency}`)
         .then(({ data }) => dispatch(addExchangeRate(data.rates[toCurrency])))
         .catch((error) => console.log(error));
-      // dispatch(addExchangeRate(updatedData.rates[toCurrency]));
     }
   }, [dispatch, fromCurrency, toCurrency]);
+
+  console.log(updatedData);
+  // console.log(dispatch(addExchangeRate(updatedData)));
 
   let fromAmount = null;
   let toAmount = null;

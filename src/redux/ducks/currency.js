@@ -47,7 +47,7 @@ export const DELETE_FAV = "DELETE_FAV";
 export const FETCH_CURRENCY = "GET_CURRENCY";
 export const LOAD_DATA = "LOAD_DATA";
 export const UPDATE_DATA = "UPDATE_DATA";
-export const FETCH_UPDATED_CURRENCY = "GET_CURRENCY";
+export const FETCH_UPDATED_CURRENCY = "FETCH_UPDATED_CURRENCY";
 
 export function addFavorite(text) {
   return {
@@ -90,6 +90,13 @@ export function updateData(first, second) {
       from: first,
       to: second,
     },
+  };
+}
+
+export function fetchUpdatedCurrency(data) {
+  return {
+    type: FETCH_UPDATED_CURRENCY,
+    payload: data,
   };
 }
 
@@ -142,13 +149,6 @@ export const updateDataReducer = (state = updateState, action) => {
   }
 };
 
-export function fetchUpdatedCurrency(data) {
-  return {
-    type: FETCH_UPDATED_CURRENCY,
-    payload: data,
-  };
-}
-
 export const putUpdatedDataReducer = (state = [], action) => {
   switch (action.type) {
     case FETCH_UPDATED_CURRENCY:
@@ -170,13 +170,14 @@ function* sagaWorker() {
 }
 
 function* fetchAvailableCurrency() {
-  return yield fetch(BASE_URL).then((response) => response.json());
+  return yield fetch(BASE_URL)
+    .then((response) => response.json())
+    .catch((err) => console.log(err));
 }
 
 export function* workerUpdateData() {
   const data = yield call(updateCurrency);
   yield put(fetchUpdatedCurrency(data));
-  console.log(data);
 }
 
 export function* watchUpdateData() {
@@ -186,9 +187,8 @@ export function* watchUpdateData() {
 function* updateCurrency() {
   let { from, to } = yield select(getDataUrl);
   console.log(`From ${from} To ${to}`);
-  if (from !== "undefined" && to) {
-    return yield fetch(
-      `${BASE_URL}?base=${from}&symbols=${to}`
-    ).then((response) => response.json());
-  }
+
+  return yield fetch(`${BASE_URL}?base=${from}&symbols=${to}`)
+    .then((response) => response.json())
+    .catch((err) => console.log(err));
 }

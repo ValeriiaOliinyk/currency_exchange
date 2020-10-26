@@ -23,7 +23,7 @@ import {
   currencyReducer,
   sagaWatcher,
   putUpdatedDataReducer,
-  // watchUpdateData,
+  watchUpdateData,
 } from "./ducks/currency";
 const saga = createSagaMiddleware();
 
@@ -60,7 +60,7 @@ const store = configureStore({
 });
 
 saga.run(sagaWatcher);
-// saga.run(watchUpdateData);
+saga.run(watchUpdateData);
 
 const persistor = persistStore(store);
 
