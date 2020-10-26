@@ -25,6 +25,7 @@ import {
   putUpdatedDataReducer,
   watchUpdateData,
 } from "./ducks/currency";
+
 const saga = createSagaMiddleware();
 
 const persistConfig = {

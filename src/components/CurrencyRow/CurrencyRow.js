@@ -55,15 +55,14 @@ export function CurrencyRow() {
 
   useEffect(() => {
     if (fromCurrency && toCurrency) {
-      dispatch(updateData(fromCurrency, toCurrency));
+      // console.log(dispatch(updateData(fromCurrency, toCurrency)));
+      // dispatch(updateData(fromCurrency, toCurrency));
       axios(`${BASE_URL}?base=${fromCurrency}&symbols=${toCurrency}`)
         .then(({ data }) => dispatch(addExchangeRate(data.rates[toCurrency])))
         .catch((error) => console.log(error));
+      // dispatch(addExchangeRate(updatedData.rates[toCurrency]));
     }
   }, [dispatch, fromCurrency, toCurrency]);
-
-  console.log(updatedData);
-  // console.log(dispatch(addExchangeRate(updatedData)));
 
   let fromAmount = null;
   let toAmount = null;

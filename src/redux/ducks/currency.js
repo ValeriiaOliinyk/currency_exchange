@@ -187,8 +187,9 @@ export function* watchUpdateData() {
 function* updateCurrency() {
   let { from, to } = yield select(getDataUrl);
   console.log(`From ${from} To ${to}`);
-
-  return yield fetch(`${BASE_URL}?base=${from}&symbols=${to}`)
-    .then((response) => response.json())
-    .catch((err) => console.log(err));
+  if (from !== "undefined" && to) {
+    return yield fetch(`${BASE_URL}?base=${from}&symbols=${to}`)
+      .then((response) => response.json())
+      .catch((err) => console.log(err));
+  }
 }
