@@ -11,13 +11,15 @@ import {
   addExchangeRate,
 } from "../../redux/ducks/currency";
 import PropTypes from "prop-types";
+import { Formik, ErrorMessage, Field } from "formik";
+import * as Yup from "yup";
 
 // Components
 import {
   FormBox,
   Option,
   FormEqually,
-  FormCurrency,
+  // FormCurrency,
   FormControl,
   FormSelect,
 } from "../../styled";
@@ -42,7 +44,6 @@ export function CurrencyRow() {
   const [amount, setAmount] = useState(1);
   const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
   const firstExchange = useRef(exchangeRate);
-  console.log(firstExchange.current);
 
   useEffect(() => {
     setToCurrency(selectedToCurrency);
@@ -64,78 +65,103 @@ export function CurrencyRow() {
     }
   }, [dispatch, fromCurrency, toCurrency]);
 
-  let fromAmount = null;
-  let toAmount = null;
+  // let fromAmount = null;
+  // let toAmount = null;
 
-  if (amountInFromCurrency) {
-    fromAmount = amount;
-    toAmount = (amount * exchangeRate).toFixed(1);
-  } else {
-    toAmount = amount;
-    fromAmount = (amount / exchangeRate).toFixed(1);
-  }
+  // if (amountInFromCurrency) {
+  //   fromAmount = amount;
+  //   toAmount = (amount * exchangeRate).toFixed(1);
+  // } else {
+  //   toAmount = amount;
+  //   fromAmount = (amount / exchangeRate).toFixed(1);
+  // }
 
-  const handleFromAmountChange = (e) => {
-    setAmount(e.target.value);
-    setAmountInFromCurrency(true);
-  };
+  // const handleFromAmountChange = (e) => {
+  //   setAmount(e.target.value);
+  //   setAmountInFromCurrency(true);
+  // };
 
-  const handleToAmountChange = (e) => {
-    setAmount(e.target.value);
-    setAmountInFromCurrency(false);
-  };
+  // const handleToAmountChange = (e) => {
+  //   setAmount(e.target.value);
+  //   setAmountInFromCurrency(false);
+  // };
 
-  console.log(exchangeRate);
-  console.log(updatedData);
+  const validationSchema = Yup.object().shape({
+    fromAmount: Yup.number().required("Required"),
+  });
 
   return (
     <Container>
-      <FormCurrency>
-        <FormBox>
-          <FormControl
-            type="number"
-            value={fromAmount}
-            onChange={handleFromAmountChange}
-            className="Form__input"
-          />
-          <FormSelect
-            as="select"
-            name="from"
-            value={fromCurrency}
-            onChange={(e) => setFromCurrency(e.target.value)}
-            className="Form__select"
-          >
-            {currency &&
-              currency.map((item) => (
-                <Option key={item} value={item}>
-                  {item}
-                </Option>
-              ))}
-          </FormSelect>
-        </FormBox>
-        <FormEqually></FormEqually>
-        <FormBox>
-          <FormControl
-            type="number"
-            value={toAmount}
-            onChange={handleToAmountChange}
-            className="Form__input"
-          />
-          <FormSelect
-            as="select"
-            value={toCurrency}
-            onChange={(e) => setToCurrency(e.target.value)}
-            className="Form__select"
-          >
-            {currency &&
-              currency.map((item) => (
-                <Option key={item} value={item}>
-                  {item}
-                </Option>
-              ))}
-          </FormSelect>
-        </FormBox>
-      </FormCurrency>
+      <Formik
+        enableReinitialize={true}
+        initialValues={{
+          fromAmount: amountInFromCurrency
+            ? amount
+            : (amount / exchangeRate).toFixed(1),
+          toAmount: amountInFromCurrency
+            ? (amount * exchangeRate).toFixed(1)
+            : amount,
+        }}
+        validationSchema={validationSchema}
+      >
+        {({ values, errors, touched }) => (
+          <>
+            <Field
+              type="number"
+              name="fromAmount"
+              value={values.fromAmount}
+              onChange={(e) => {
+                setAmount(e.target.value);
+                setAmountInFromCurrency(true);
+              }}
+            />
+            {errors.fromAmount && touched.fromAmount ? (
+              <div>{errors.fromAmount}</div>
+            ) : null}
+            <FormBox>
+              <FormSelect
+                as="select"
+                value={fromCurrency}
+                onChange={(e) => setFromCurrency(e.target.value)}
+              >
+                <ErrorMessage name="from" />
+                {currency &&
+                  currency.map((item) => (
+                    <Option key={item} value={item}>
+                      {item}
+                    </Option>
+                  ))}
+              </FormSelect>
+            </FormBox>
+            <FormEqually></FormEqually>
+            <FormBox>
+              <FormControl
+                type="number"
+                value={values.toAmount}
+                onChange={(e) => {
+                  setAmount(e.target.value);
+                  setAmountInFromCurrency(false);
+                }}
+              />
+              <FormSelect
+                as="select"
+                value={toCurrency}
+                onChange={(e) => setToCurrency(e.target.value)}
+              >
+                {currency &&
+                  currency.map((item) => (
+                    <Option key={item} value={item}>
+                      {item}
+                    </Option>
+                  ))}
+              </FormSelect>
+            </FormBox>
+            {errors.fromField && touched.fromField ? (
+              <div>{errors.fromField}</div>
+            ) : null}
+          </>
+        )}
+      </Formik>
     </Container>
   );
 }
