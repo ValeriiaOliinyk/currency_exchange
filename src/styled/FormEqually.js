@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import equally from "../images/equal.svg";
 
-export const FormEqually = styled.button`
+export const FormEqually = styled.div`
   width: 40px;
   height: 40px;
   background-image: url(${equally});

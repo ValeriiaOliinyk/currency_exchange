@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   loadData,
-  addExchangeRate,
   getCurrencyArray,
   getFromCurrency,
   getToCurrency,
   getExchangeRate,
   updateData,
   getUpdatedData,
+  addExchangeRate,
 } from "../../redux/ducks/currency";
 import PropTypes from "prop-types";
 
@@ -41,6 +41,8 @@ export function CurrencyRow() {
   const [exchangeRate, setExchangeRate] = useState(selectedExchangeRate);
   const [amount, setAmount] = useState(1);
   const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
+  const firstExchange = useRef(exchangeRate);
+  console.log(firstExchange.current);
 
   useEffect(() => {
     setToCurrency(selectedToCurrency);
@@ -49,17 +51,16 @@ export function CurrencyRow() {
   useEffect(() => {
     if (updatedData.rates) {
       setExchangeRate(updatedData.rates[toCurrency]);
-      // dispatch(addExchangeRate(updatedData.rates[toCurrency]));
     }
-    // setExchangeRate(selectedExchangeRate);
-  }, [toCurrency, updatedData.rates]);
+  }, [dispatch, toCurrency, updatedData.rates]);
+
+  useEffect(() => {
+    dispatch(addExchangeRate(firstExchange.current));
+  }, [dispatch]);
 
   useEffect(() => {
     if (fromCurrency && toCurrency) {
       dispatch(updateData(fromCurrency, toCurrency));
-      // if (updatedData.rates) {
-      //   dispatch(addExchangeRate(updatedData.rates[toCurrency]));
-      // }
     }
   }, [dispatch, fromCurrency, toCurrency]);
 
@@ -83,16 +84,6 @@ export function CurrencyRow() {
     setAmount(e.target.value);
     setAmountInFromCurrency(false);
   };
-
-  // const changeExchangeRate = (e) => {
-  //   // e.preventDefault();
-  //   if (updatedData.rates) {
-  //     setExchangeRate(updatedData.rates[toCurrency]);
-  //     // dispatch(addExchangeRate(updatedData.rates[toCurrency]));
-  //   }
-
-  //   console.log("Click");
-  // };
 
   console.log(exchangeRate);
   console.log(updatedData);
@@ -122,7 +113,7 @@ export function CurrencyRow() {
               ))}
           </FormSelect>
         </FormBox>
-
+        <FormEqually></FormEqually>
         <FormBox>
           <FormControl
             type="number"
@@ -144,10 +135,6 @@ export function CurrencyRow() {
               ))}
           </FormSelect>
         </FormBox>
-        {/* <FormEqually
-          type="submit"
-          onClick={(e) => changeExchangeRate(e)}
-        ></FormEqually> */}
       </FormCurrency>
     </Container>
   );
