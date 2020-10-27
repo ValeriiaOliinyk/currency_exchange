@@ -3,6 +3,9 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const NavLinks = styled(NavLink)`
+  @media screen and (max-width: 768px) {
+    font-size: 14px;
+  }
   font-size: 24px;
   color: ${(props) => props.theme.colors.main};
   text-decoration: none;
@@ -13,6 +16,5 @@ export const NavLinks = styled(NavLink)`
     color: ${(props) => props.theme.colors.hover};
     font-weight: 700;
     text-decoration: none;
-    font-size: 24px;
   }
 `;
