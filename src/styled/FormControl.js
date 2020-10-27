@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { Form } from "react-bootstrap";
+import { Field } from "formik";
 
-export const FormControl = styled(Form.Control)`
+export const FormControl = styled(Field)`
   width: 75%;
+  padding: 10px;
 `;

@@ -24,3 +24,4 @@ export { Option } from "./Option";
 export { Title } from "./Title";
 export { TitleHome } from "./TitleHome";
 export { Value } from "./Value";
+export { ErrorMessage } from "./ErrorMessage";

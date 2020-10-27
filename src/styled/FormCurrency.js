@@ -8,7 +8,7 @@ export const FormCurrency = styled(Form)`
 
   margin: auto;
   width: 50%;
-  height: 200px;
+  height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -5,5 +5,6 @@ export default {
     dark: "#56809b",
     hover: "#67a030",
     white: "#ffffff",
+    red: "#800000",
   },
 };

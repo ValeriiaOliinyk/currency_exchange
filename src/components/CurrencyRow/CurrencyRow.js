@@ -11,7 +11,7 @@ import {
   addExchangeRate,
 } from "../../redux/ducks/currency";
 import PropTypes from "prop-types";
-import { Formik, ErrorMessage, Field } from "formik";
+import { Formik } from "formik";
 import * as Yup from "yup";
 
 // Components
@@ -19,9 +19,10 @@ import {
   FormBox,
   Option,
   FormEqually,
-  // FormCurrency,
+  FormCurrency,
   FormControl,
   FormSelect,
+  ErrorMessage,
 } from "../../styled";
 
 // Styles
@@ -88,6 +89,7 @@ export function CurrencyRow() {
 
   const validationSchema = Yup.object().shape({
     fromAmount: Yup.number().required("Required"),
+    toAmount: Yup.number().required("Required"),
   });
 
   return (
@@ -105,26 +107,23 @@ export function CurrencyRow() {
         validationSchema={validationSchema}
       >
         {({ values, errors, touched }) => (
-          <>
-            <Field
-              type="number"
-              name="fromAmount"
-              value={values.fromAmount}
-              onChange={(e) => {
-                setAmount(e.target.value);
-                setAmountInFromCurrency(true);
-              }}
-            />
-            {errors.fromAmount && touched.fromAmount ? (
-              <div>{errors.fromAmount}</div>
-            ) : null}
+          <FormCurrency>
             <FormBox>
+              <FormControl
+                type="number"
+                name="fromAmount"
+                value={values.fromAmount}
+                onChange={(e) => {
+                  setAmount(e.target.value);
+                  setAmountInFromCurrency(true);
+                }}
+              />
+
               <FormSelect
                 as="select"
                 value={fromCurrency}
                 onChange={(e) => setFromCurrency(e.target.value)}
               >
-                <ErrorMessage name="from" />
                 {currency &&
                   currency.map((item) => (
                     <Option key={item} value={item}>
@@ -133,16 +132,21 @@ export function CurrencyRow() {
                   ))}
               </FormSelect>
             </FormBox>
+            {errors.fromAmount && touched.fromAmount ? (
+              <ErrorMessage>{errors.fromAmount}</ErrorMessage>
+            ) : null}
             <FormEqually></FormEqually>
             <FormBox>
               <FormControl
                 type="number"
+                name="toAmount"
                 value={values.toAmount}
                 onChange={(e) => {
                   setAmount(e.target.value);
                   setAmountInFromCurrency(false);
                 }}
               />
+
               <FormSelect
                 as="select"
                 value={toCurrency}
@@ -156,10 +160,10 @@ export function CurrencyRow() {
                   ))}
               </FormSelect>
             </FormBox>
-            {errors.fromField && touched.fromField ? (
-              <div>{errors.fromField}</div>
+            {errors.toAmount && touched.toAmount ? (
+              <ErrorMessage>{errors.toAmount}</ErrorMessage>
             ) : null}
-          </>
+          </FormCurrency>
         )}
       </Formik>
     </Container>
