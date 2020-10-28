@@ -51,6 +51,10 @@ const rootReducer = combineReducers({
   updatedData: putUpdatedDataReducer,
 });
 
+type RootReducerType = typeof rootReducer;
+
+export type AppStateType = ReturnType<RootReducerType>;
+
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
