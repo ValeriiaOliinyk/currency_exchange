@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 
 export const FormCurrency = styled(Form)`
   @media screen and (max-width: 768px) {
-    width: 80%;
+    width: 90%;
   }
 
   margin: auto;

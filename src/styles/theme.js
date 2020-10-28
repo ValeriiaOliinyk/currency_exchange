@@ -6,5 +6,6 @@ export default {
     hover: "#67a030",
     white: "#ffffff",
     red: "#800000",
+    black: "#000000",
   },
 };

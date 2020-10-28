@@ -12,7 +12,7 @@ import {
 } from "../../redux/ducks/currency";
 import PropTypes from "prop-types";
 import { Formik } from "formik";
-import * as Yup from "yup";
+import { validationSchema } from "../../helpers/validation";
 
 // Components
 import {
@@ -66,32 +66,6 @@ export function CurrencyRow() {
     }
   }, [dispatch, fromCurrency, toCurrency]);
 
-  // let fromAmount = null;
-  // let toAmount = null;
-
-  // if (amountInFromCurrency) {
-  //   fromAmount = amount;
-  //   toAmount = (amount * exchangeRate).toFixed(1);
-  // } else {
-  //   toAmount = amount;
-  //   fromAmount = (amount / exchangeRate).toFixed(1);
-  // }
-
-  // const handleFromAmountChange = (e) => {
-  //   setAmount(e.target.value);
-  //   setAmountInFromCurrency(true);
-  // };
-
-  // const handleToAmountChange = (e) => {
-  //   setAmount(e.target.value);
-  //   setAmountInFromCurrency(false);
-  // };
-
-  const validationSchema = Yup.object().shape({
-    fromAmount: Yup.number().required("Required"),
-    toAmount: Yup.number().required("Required"),
-  });
-
   return (
     <Container>
       <Formik
@@ -118,7 +92,6 @@ export function CurrencyRow() {
                   setAmountInFromCurrency(true);
                 }}
               />
-
               <FormSelect
                 as="select"
                 value={fromCurrency}
@@ -134,7 +107,9 @@ export function CurrencyRow() {
             </FormBox>
             {errors.fromAmount && touched.fromAmount ? (
               <ErrorMessage>{errors.fromAmount}</ErrorMessage>
-            ) : null}
+            ) : (
+              <ErrorMessage transparent>Transparent</ErrorMessage>
+            )}
             <FormEqually></FormEqually>
             <FormBox>
               <FormControl
@@ -162,7 +137,9 @@ export function CurrencyRow() {
             </FormBox>
             {errors.toAmount && touched.toAmount ? (
               <ErrorMessage>{errors.toAmount}</ErrorMessage>
-            ) : null}
+            ) : (
+              <ErrorMessage transparent>Transparent</ErrorMessage>
+            )}
           </FormCurrency>
         )}
       </Formik>
@@ -183,3 +160,5 @@ CurrencyRow.propTypes = {
   selectedToCurrency: PropTypes.string,
   selectedExchangeRate: PropTypes.number,
 };
+
+// Чтобы поля  при появлении ошибки не дергались добавить компонент ошибки с прозрачным цветом

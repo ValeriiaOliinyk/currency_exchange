@@ -7,4 +7,5 @@ export const FormEqually = styled.div`
   background-image: url(${equally});
   text-align: center;
   font-size: 30px;
+  margin-bottom: 26px;
 `;
