@@ -160,5 +160,3 @@ CurrencyRow.propTypes = {
   selectedToCurrency: PropTypes.string,
   selectedExchangeRate: PropTypes.number,
 };
-
-// Чтобы поля  при появлении ошибки не дергались добавить компонент ошибки с прозрачным цветом
