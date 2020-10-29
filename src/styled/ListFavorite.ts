@@ -7,5 +7,5 @@ export const ListFavorite = styled.ul`
   text-align: center;
   padding: 20px;
   padding-bottom: 30px;
-  border-bottom: ${(props) => props.favorite && "4px dashed #ffc107"};
+  border-bottom: ${(props: any) => props.favorite && "4px dashed #ffc107"};
 `;

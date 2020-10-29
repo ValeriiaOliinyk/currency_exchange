@@ -66,17 +66,19 @@ export function CurrencyRow() {
     }
   }, [dispatch, fromCurrency, toCurrency]);
 
+  const fromAmount = () =>
+    amountInFromCurrency ? amount : (amount / exchangeRate).toFixed(1);
+
+  const tomAmount = () =>
+    amountInFromCurrency ? (amount * exchangeRate).toFixed(1) : amount;
+
   return (
     <Container>
       <Formik
         enableReinitialize={true}
         initialValues={{
-          fromAmount: amountInFromCurrency
-            ? amount
-            : (amount / exchangeRate).toFixed(1),
-          toAmount: amountInFromCurrency
-            ? (amount * exchangeRate).toFixed(1)
-            : amount,
+          fromAmount: fromAmount(),
+          toAmount: tomAmount(),
         }}
         validationSchema={validationSchema}
       >
@@ -110,7 +112,7 @@ export function CurrencyRow() {
             ) : (
               <ErrorMessage transparent>Transparent</ErrorMessage>
             )}
-            <FormEqually></FormEqually>
+            <FormEqually />
             <FormBox>
               <FormControl
                 type="number"

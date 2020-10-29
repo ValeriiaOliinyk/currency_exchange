@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const NavigationList = styled.ul`
-  @media screen and (max-width: 768px) {
+  @media ${({ theme }) => theme.breakpoints.tablet} {
     width: 200px;
   }
   display: flex;

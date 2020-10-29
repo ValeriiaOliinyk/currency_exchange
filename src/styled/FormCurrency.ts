@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Form } from "react-bootstrap";
 
 export const FormCurrency = styled(Form)`
-  @media screen and (max-width: 768px) {
+  @media ${({ theme }) => theme.breakpoints.tablet} {
     width: 90%;
   }
 

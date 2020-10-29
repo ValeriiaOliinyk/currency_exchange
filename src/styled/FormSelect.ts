@@ -2,11 +2,11 @@ import styled from "styled-components";
 import { Form } from "react-bootstrap";
 
 export const FormSelect = styled(Form.Control)`
-  @media screen and (max-width: 425px) {
+  @media ${({ theme }) => theme.breakpoints.mobileL} {
     width: 40%;
   }
 
-  @media screen and (max-width: 768px) {
+  @media ${({ theme }) => theme.breakpoints.tablet} {
     font-size: 12px;
   }
   width: 20%;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const MainTitle = styled.h1`
-  @media screen and (max-width: 768px) {
+  @media ${({ theme }) => theme.breakpoints.tablet} {
     font-size: 24px;
   }
   text-align: center;

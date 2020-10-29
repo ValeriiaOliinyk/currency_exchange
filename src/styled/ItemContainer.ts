@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ItemContainer = styled.div`
-  @media screen and (max-width: 768px) {
+  @media ${({ theme }) => theme.breakpoints.tablet} {
     width: 80%;
   }
   display: flex;

@@ -1,43 +1,60 @@
 import { call, put, takeEvery, select } from "redux-saga/effects";
 import { AppStateType } from "../store";
+import { createSelector } from "reselect";
 const BASE_URL = "https://api.exchangeratesapi.io/latest";
+
+// Убрать все any + добавить типы к saga
 
 // Selectors
 
-export const getCurrency = (state: AppStateType) =>
-  state.currency.currencyTypes;
+interface CurrencyTypes {
+  base: string;
+  date: string;
+  rates: object;
+}
 
-export const getCurrencyArray = (state: AppStateType) => {
-  const currency: any = getCurrency(state);
-  if (currency.rates && currency.base) {
-    return [currency.base, ...Object.keys(currency.rates)];
-  }
-};
+export const getCurrency = (state: AppStateType) => state.currency;
 
-export const getFromCurrency = (state: AppStateType) => {
-  const currency: any = getCurrency(state);
-  if (currency.base) {
-    return currency.base;
+export const getCurrencyArray = createSelector(
+  [getCurrency],
+  (currency: CurrencyTypes) => {
+    if (currency.rates && currency.base) {
+      return [currency.base, ...Object.keys(currency.rates)];
+    }
   }
-};
+);
 
-export const getToCurrency = (state: AppStateType) => {
-  const currency: any = getCurrency(state);
-  if (currency.rates) {
-    return Object.keys(currency.rates)[0];
+export const getFromCurrency = createSelector(
+  [getCurrency],
+  (currency: CurrencyTypes) => {
+    if (currency.base) {
+      return currency.base;
+    }
   }
-};
+);
+
+export const getToCurrency = createSelector(
+  [getCurrency],
+  (currency: CurrencyTypes) => {
+    if (currency.rates) {
+      return Object.keys(currency.rates)[0];
+    }
+  }
+);
 
 export const getFavorites = (state: AppStateType) => state.favorite;
+
 export const getNumberOfFavorites = (state: AppStateType) =>
   state.favorite.length;
-export const getRegularCurrency = (state: AppStateType) => {
-  const currency: any = getCurrencyArray(state);
-  const favorites: any = getFavorites(state);
-  if (currency) {
-    return currency.filter((n: string) => favorites.indexOf(n) === -1);
+
+export const getRegularCurrency = createSelector(
+  [getCurrencyArray, getFavorites],
+  (currency: Array<string> | undefined, favorites: Array<string>) => {
+    if (currency) {
+      return currency.filter((item: string) => favorites.indexOf(item) === -1);
+    }
   }
-};
+);
 
 export const getExchangeRate = (state: AppStateType) => state.rate;
 export const getDataUrl = (state: AppStateType) => state.data;
@@ -175,21 +192,10 @@ export const favoriteReducer = (
   }
 };
 
-type InitialStateType = {
-  currencyTypes: Array<string>;
-};
-
-const initialState: InitialStateType = {
-  currencyTypes: [],
-};
-
-export const currencyReducer = (
-  state = initialState,
-  action: any
-): InitialStateType => {
+export const currencyReducer = (state: Array<string> = [], action: any) => {
   switch (action.type) {
     case FETCH_CURRENCY:
-      return { ...state, currencyTypes: action.payload };
+      return { ...state, ...action.payload };
     default:
       return state;
   }

@@ -1,7 +1,7 @@
 import React from "react";
 
 // Components
-import { CurrencyRow } from "../../components";
+import { CurrencyRow } from "..";
 import { Title, Container } from "../../styled";
 
 export function Convert() {
