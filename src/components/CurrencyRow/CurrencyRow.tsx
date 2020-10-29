@@ -66,27 +66,22 @@ export function CurrencyRow() {
     }
   }, [dispatch, fromCurrency, toCurrency]);
 
-  const fromAmount = () =>
-    amountInFromCurrency ? amount : (amount / exchangeRate).toFixed(1);
-
-  const tomAmount = () =>
-    amountInFromCurrency ? (amount * exchangeRate).toFixed(1) : amount;
-
-  interface MyFormValues {
-    fromAmount: number | string;
-    toAmount: number | string;
-  }
-
-  const initialValues: MyFormValues = {
-    fromAmount: fromAmount(),
-    toAmount: tomAmount(),
+  const getinitialValues = () => {
+    return {
+      fromAmount: amountInFromCurrency
+        ? amount
+        : (amount / exchangeRate).toFixed(1),
+      toAmount: amountInFromCurrency
+        ? (amount * exchangeRate).toFixed(1)
+        : amount,
+    };
   };
 
   return (
     <Container>
       <Formik
         enableReinitialize={true}
-        initialValues={initialValues}
+        initialValues={getinitialValues()}
         validationSchema={validationSchema}
         onSubmit={() => {}}
       >
