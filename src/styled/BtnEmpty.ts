@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import star from "../images/starEmpty.svg";
 
-export const BtnEmpty = styled.section`
+interface BtnEmptyProps {
+  type: string;
+}
+
+export const BtnEmpty = styled.section<BtnEmptyProps>`
   @media ${({ theme }) => theme.breakpoints.tablet} {
     width: 15px;
     height: 15px;

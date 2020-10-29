@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import star from "../images/star.svg";
 
-export const BtnFavorite = styled.section`
+interface BtnFavoriteProps {
+  type: string;
+}
+
+export const BtnFavorite = styled.section<BtnFavoriteProps>`
   width: 20px;
   height: 20px;
   background-image: url(${star});

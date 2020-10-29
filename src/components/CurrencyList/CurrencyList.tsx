@@ -26,7 +26,7 @@ export function CurrencyList() {
   const regularCurrency = useSelector(getRegularCurrency);
   const numberOfFavorites = useSelector(getNumberOfFavorites);
 
-  const toggleFavAction = (text) => {
+  const toggleFavAction = (text: string) => {
     if (!favorites.includes(text)) {
       dispatch(addFavorite(text));
     }

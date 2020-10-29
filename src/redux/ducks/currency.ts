@@ -1,17 +1,12 @@
 import { call, put, takeEvery, select } from "redux-saga/effects";
 import { AppStateType } from "../store";
 import { createSelector } from "reselect";
+import { CurrencyTypes } from "../../helpers/interfaces";
 const BASE_URL = "https://api.exchangeratesapi.io/latest";
 
 // Убрать все any + добавить типы к saga
 
 // Selectors
-
-interface CurrencyTypes {
-  base: string;
-  date: string;
-  rates: object;
-}
 
 export const getCurrency = (state: AppStateType) => state.currency;
 

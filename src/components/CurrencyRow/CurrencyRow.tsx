@@ -36,9 +36,9 @@ export function CurrencyRow() {
 
   const currency = useSelector(getCurrencyArray);
   const selectedFromCurrency = useSelector(getFromCurrency);
-  const selectedToCurrency = useSelector(getToCurrency);
+  const selectedToCurrency: any = useSelector(getToCurrency);
   const selectedExchangeRate = useSelector(getExchangeRate);
-  const updatedData = useSelector(getUpdatedData);
+  const updatedData: any = useSelector(getUpdatedData);
   const [fromCurrency, setFromCurrency] = useState(selectedFromCurrency);
   const [toCurrency, setToCurrency] = useState(selectedToCurrency);
   const [exchangeRate, setExchangeRate] = useState(selectedExchangeRate);
@@ -72,15 +72,23 @@ export function CurrencyRow() {
   const tomAmount = () =>
     amountInFromCurrency ? (amount * exchangeRate).toFixed(1) : amount;
 
+  interface MyFormValues {
+    fromAmount: number | string;
+    toAmount: number | string;
+  }
+
+  const initialValues: MyFormValues = {
+    fromAmount: fromAmount(),
+    toAmount: tomAmount(),
+  };
+
   return (
     <Container>
       <Formik
         enableReinitialize={true}
-        initialValues={{
-          fromAmount: fromAmount(),
-          toAmount: tomAmount(),
-        }}
+        initialValues={initialValues}
         validationSchema={validationSchema}
+        onSubmit={() => {}}
       >
         {({ values, errors, touched }) => (
           <FormCurrency>
@@ -89,7 +97,7 @@ export function CurrencyRow() {
                 type="number"
                 name="fromAmount"
                 value={values.fromAmount}
-                onChange={(e) => {
+                onChange={(e: any) => {
                   setAmount(e.target.value);
                   setAmountInFromCurrency(true);
                 }}
@@ -97,7 +105,7 @@ export function CurrencyRow() {
               <FormSelect
                 as="select"
                 value={fromCurrency}
-                onChange={(e) => setFromCurrency(e.target.value)}
+                onChange={(e: any) => setFromCurrency(e.target.value)}
               >
                 {currency &&
                   currency.map((item) => (
@@ -118,7 +126,7 @@ export function CurrencyRow() {
                 type="number"
                 name="toAmount"
                 value={values.toAmount}
-                onChange={(e) => {
+                onChange={(e: any) => {
                   setAmount(e.target.value);
                   setAmountInFromCurrency(false);
                 }}
@@ -127,7 +135,7 @@ export function CurrencyRow() {
               <FormSelect
                 as="select"
                 value={toCurrency}
-                onChange={(e) => setToCurrency(e.target.value)}
+                onChange={(e: any) => setToCurrency(e.target.value)}
               >
                 {currency &&
                   currency.map((item) => (
