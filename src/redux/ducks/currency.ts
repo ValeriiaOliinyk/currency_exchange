@@ -4,8 +4,6 @@ import { createSelector } from "reselect";
 import { CurrencyTypes } from "../../helpers/interfaces";
 const BASE_URL = "https://api.exchangeratesapi.io/latest";
 
-// Убрать все any + добавить типы к saga
-
 // Selectors
 
 export const getCurrency = (state: AppStateType) => state.currency;
@@ -56,10 +54,11 @@ export const getDataUrl = (state: AppStateType) => state.data;
 export const getUpdatedData = (state: AppStateType) => state.updatedData;
 
 // Actions
+
 export const EXCHANGE_RATE = "EXCHANGE_RATE";
 export const ADD_FAV = "ADD_FAV";
 export const DELETE_FAV = "DELETE_FAV";
-export const FETCH_CURRENCY = "GET_CURRENCY";
+export const FETCH_CURRENCY = "FETCH_CURRENCY";
 export const LOAD_DATA = "LOAD_DATA";
 export const UPDATE_DATA = "UPDATE_DATA";
 export const FETCH_UPDATED_CURRENCY = "FETCH_UPDATED_CURRENCY";
@@ -102,10 +101,10 @@ export function addExchangeRate(rate: number): AddExchangeRateActionType {
 
 type FetchCurrencyActionType = {
   type: typeof FETCH_CURRENCY;
-  payload: CurrencyTypes | undefined;
+  payload?: object;
 };
 
-export function fetchCurrency(data: CurrencyTypes): FetchCurrencyActionType {
+export function fetchCurrency(data: object): FetchCurrencyActionType {
   return {
     type: FETCH_CURRENCY,
     payload: data,
@@ -147,11 +146,11 @@ export function updateData(
 
 type FetchUpdatedCurrencyActionType = {
   type: typeof FETCH_UPDATED_CURRENCY;
-  payload: number;
+  payload: object;
 };
 
 export function fetchUpdatedCurrency(
-  data: number
+  data: object
 ): FetchUpdatedCurrencyActionType {
   return {
     type: FETCH_UPDATED_CURRENCY,
@@ -187,7 +186,10 @@ export const favoriteReducer = (
   }
 };
 
-export const currencyReducer = (state: object = {}, action: any) => {
+export const currencyReducer = (
+  state: Array<string> = [],
+  action: FetchCurrencyActionType
+) => {
   switch (action.type) {
     case FETCH_CURRENCY:
       return action.payload;
@@ -232,33 +234,33 @@ export const putUpdatedDataReducer = (
 
 // Saga
 
-export function* sagaWatcher() {
+export function* sagaWatcher(): Generator<object> {
   yield takeEvery(LOAD_DATA, sagaWorker);
 }
 
-function* sagaWorker() {
+function* sagaWorker(): object {
   const data = yield call(fetchAvailableCurrency);
   yield put(fetchCurrency(data));
 }
 
-function* fetchAvailableCurrency() {
+function* fetchAvailableCurrency(): object {
   return yield fetch(BASE_URL)
     .then((response) => response.json())
     .catch((err) => console.log(err));
 }
 
-export function* workerUpdateData() {
+export function* workerUpdateData(): object {
   const data = yield call(updateCurrency);
   yield put(fetchUpdatedCurrency(data));
 }
 
-export function* watchUpdateData() {
+export function* watchUpdateData(): Generator<object> {
   yield takeEvery(UPDATE_DATA, workerUpdateData);
 }
 
-function* updateCurrency() {
+function* updateCurrency(): object {
   let { from, to } = yield select(getDataUrl);
-  if (from !== "undefined" && to) {
+  if (from !== "undefined" && to !== "undefined") {
     return yield fetch(`${BASE_URL}?base=${from}&symbols=${to}`)
       .then((response) => response.json())
       .catch((err) => console.log(err));

@@ -1,4 +1,5 @@
 export interface CurrencyTypes {
+  currency: any;
   base: string;
   date: string;
   rates: {
