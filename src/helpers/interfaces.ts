@@ -1,5 +1,12 @@
 export interface CurrencyTypes {
   base: string;
   date: string;
-  rates: object;
+  rates: {
+    [index: string]: any;
+  };
+}
+
+export interface InitialValues {
+  fromAmount: string | number;
+  toAmount: string | number;
 }

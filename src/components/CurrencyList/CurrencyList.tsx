@@ -22,9 +22,13 @@ import {
 
 export function CurrencyList() {
   const dispatch = useDispatch();
-  const favorites = useSelector(getFavorites);
-  const regularCurrency = useSelector(getRegularCurrency);
-  const numberOfFavorites = useSelector(getNumberOfFavorites);
+  const favorites: Array<string> | undefined = useSelector(getFavorites);
+  const regularCurrency: Array<string> | undefined = useSelector(
+    getRegularCurrency
+  );
+  const numberOfFavorites: Number | undefined = useSelector(
+    getNumberOfFavorites
+  );
 
   const toggleFavAction = (text: string) => {
     if (!favorites.includes(text)) {

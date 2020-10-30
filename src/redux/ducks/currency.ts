@@ -102,10 +102,10 @@ export function addExchangeRate(rate: number): AddExchangeRateActionType {
 
 type FetchCurrencyActionType = {
   type: typeof FETCH_CURRENCY;
-  payload: string;
+  payload: CurrencyTypes | undefined;
 };
 
-export function fetchCurrency(data: string): FetchCurrencyActionType {
+export function fetchCurrency(data: CurrencyTypes): FetchCurrencyActionType {
   return {
     type: FETCH_CURRENCY,
     payload: data,
@@ -187,10 +187,10 @@ export const favoriteReducer = (
   }
 };
 
-export const currencyReducer = (state: Array<string> = [], action: any) => {
+export const currencyReducer = (state: object = {}, action: any) => {
   switch (action.type) {
     case FETCH_CURRENCY:
-      return { ...state, ...action.payload };
+      return action.payload;
     default:
       return state;
   }

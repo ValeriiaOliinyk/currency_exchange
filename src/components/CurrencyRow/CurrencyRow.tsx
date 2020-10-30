@@ -13,6 +13,7 @@ import {
 import PropTypes from "prop-types";
 import { Formik } from "formik";
 import { validationSchema } from "../../helpers/validation";
+import { InitialValues, CurrencyTypes } from "../../helpers/interfaces";
 
 // Components
 import {
@@ -34,24 +35,34 @@ export function CurrencyRow() {
     dispatch(loadData());
   }, [dispatch]);
 
-  const currency = useSelector(getCurrencyArray);
-  const selectedFromCurrency = useSelector(getFromCurrency);
-  const selectedToCurrency: any = useSelector(getToCurrency);
-  const selectedExchangeRate = useSelector(getExchangeRate);
-  const updatedData: any = useSelector(getUpdatedData);
-  const [fromCurrency, setFromCurrency] = useState(selectedFromCurrency);
-  const [toCurrency, setToCurrency] = useState(selectedToCurrency);
-  const [exchangeRate, setExchangeRate] = useState(selectedExchangeRate);
-  const [amount, setAmount] = useState(1);
-  const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
-  const firstExchange = useRef(exchangeRate);
+  const currency: Array<string> | undefined = useSelector(getCurrencyArray);
+  const selectedFromCurrency: string | undefined = useSelector(getFromCurrency);
+  const selectedToCurrency: string | undefined = useSelector(getToCurrency);
+  const selectedExchangeRate: number | undefined = useSelector(getExchangeRate);
+  const updatedData: CurrencyTypes = useSelector(getUpdatedData);
+
+  const [fromCurrency, setFromCurrency] = useState<string | undefined>(
+    selectedFromCurrency
+  );
+  const [toCurrency, setToCurrency] = useState<string | undefined>(
+    selectedToCurrency
+  );
+  const [exchangeRate, setExchangeRate] = useState<number>(
+    selectedExchangeRate
+  );
+  const [amount, setAmount] = useState<number>(1);
+  const [amountInFromCurrency, setAmountInFromCurrency] = useState<boolean>(
+    true
+  );
+
+  const firstExchange = useRef<number>(exchangeRate);
 
   useEffect(() => {
     setToCurrency(selectedToCurrency);
   }, [selectedToCurrency]);
 
   useEffect(() => {
-    if (updatedData.rates) {
+    if (updatedData.rates && toCurrency) {
       setExchangeRate(updatedData.rates[toCurrency]);
     }
   }, [dispatch, toCurrency, updatedData.rates]);
@@ -66,7 +77,7 @@ export function CurrencyRow() {
     }
   }, [dispatch, fromCurrency, toCurrency]);
 
-  const getinitialValues = () => {
+  const getInitialValues = (): InitialValues => {
     return {
       fromAmount: amountInFromCurrency
         ? amount
@@ -81,7 +92,7 @@ export function CurrencyRow() {
     <Container>
       <Formik
         enableReinitialize={true}
-        initialValues={getinitialValues()}
+        initialValues={getInitialValues()}
         validationSchema={validationSchema}
         onSubmit={() => {}}
       >
@@ -92,7 +103,9 @@ export function CurrencyRow() {
                 type="number"
                 name="fromAmount"
                 value={values.fromAmount}
-                onChange={(e: any) => {
+                onChange={(e: {
+                  target: { value: React.SetStateAction<number> };
+                }) => {
                   setAmount(e.target.value);
                   setAmountInFromCurrency(true);
                 }}
@@ -100,7 +113,9 @@ export function CurrencyRow() {
               <FormSelect
                 as="select"
                 value={fromCurrency}
-                onChange={(e: any) => setFromCurrency(e.target.value)}
+                onChange={(e: {
+                  target: { value: React.SetStateAction<string | undefined> };
+                }) => setFromCurrency(e.target.value)}
               >
                 {currency &&
                   currency.map((item) => (
@@ -121,7 +136,9 @@ export function CurrencyRow() {
                 type="number"
                 name="toAmount"
                 value={values.toAmount}
-                onChange={(e: any) => {
+                onChange={(e: {
+                  target: { value: React.SetStateAction<number> };
+                }) => {
                   setAmount(e.target.value);
                   setAmountInFromCurrency(false);
                 }}
@@ -130,7 +147,9 @@ export function CurrencyRow() {
               <FormSelect
                 as="select"
                 value={toCurrency}
-                onChange={(e: any) => setToCurrency(e.target.value)}
+                onChange={(e: {
+                  target: { value: React.SetStateAction<string | undefined> };
+                }) => setToCurrency(e.target.value)}
               >
                 {currency &&
                   currency.map((item) => (
