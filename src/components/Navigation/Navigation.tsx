@@ -15,7 +15,7 @@ export function Navigation() {
   return (
     <Header>
       <Nav>
-        <Logo></Logo>
+        <Logo />
         <NavigationList>
           <NavigationItems>
             <NavLinks to={routes.home}>Home</NavLinks>

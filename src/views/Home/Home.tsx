@@ -14,7 +14,10 @@ export default function Home() {
     dispatch(loadData());
   }, [dispatch]);
 
-  const numberOfFavorites = useSelector(getNumberOfFavorites);
+  const numberOfFavorites: number | undefined = useSelector(
+    getNumberOfFavorites
+  );
+
   return (
     <Main>
       <Container>

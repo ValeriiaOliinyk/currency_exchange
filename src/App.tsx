@@ -7,11 +7,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Navigation, MainLoader } from "./components";
 
 // Views
-const Home = lazy(() =>
-  import("./views/Home/Home" /* webpackChunkName: "home-page" */)
+const Home = lazy(
+  () => import("./views/Home/Home" /* webpackChunkName: "home-page" */)
 );
-const Currency = lazy(() =>
-  import("./views/Currency/Currency" /* webpackChunkName: "currency-page" */)
+const Currency = lazy(
+  () =>
+    import("./views/Currency/Currency" /* webpackChunkName: "currency-page" */)
 );
 
 export default function App() {

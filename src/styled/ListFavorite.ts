@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface FavoriteStyled {
+  favorite?: boolean;
+}
+
 export const ListFavorite = styled.ul`
   margin: auto;
   margin-top: 20px;
@@ -7,5 +11,6 @@ export const ListFavorite = styled.ul`
   text-align: center;
   padding: 20px;
   padding-bottom: 30px;
-  border-bottom: ${(props) => props.favorite && "4px dashed #ffc107"};
+  border-bottom: ${(props: FavoriteStyled) =>
+    props.favorite && "4px dashed #ffc107"};
 `;
