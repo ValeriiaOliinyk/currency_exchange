@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Container component works 1`] = `
+.c0 {
+  width: 80%;
+  margin: auto;
+  margin-top: 100px;
+}
+
+<section
+  className="c0"
+/>
+`;
+
+exports[`Container component works with Title component inside 1`] = `
+.c0 {
+  width: 80%;
+  margin: auto;
+  margin-top: 100px;
+}
+
+<section
+  className="c0"
+/>
+`;
+
+exports[`it works 1`] = `
+.c0 {
+  width: 80%;
+  margin: auto;
+  margin-top: 100px;
+}
+
+<section
+  className="c0"
+/>
+`;
