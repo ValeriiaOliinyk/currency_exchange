@@ -10,6 +10,7 @@ import store from "../../redux/store";
 import { CurrencyRow } from "../CurrencyRow/CurrencyRow";
 
 import theme from "../../styles/theme";
+import { shallow } from "enzyme";
 
 describe("Convert component renders correctly", () => {
   it("CurrencyRow component works", () => {
@@ -26,11 +27,11 @@ describe("Convert component renders correctly", () => {
   });
 
   it("Container component works", () => {
-    const tree = renderer.create(<Container />).toJSON();
+    const tree = shallow(<Container />);
     expect(tree).toMatchSnapshot();
   });
 
-  it("renders correctly", () => {
+  it("Renders correctly", () => {
     const tree = renderer.create(<Title theme={theme}>Convert</Title>).toJSON();
     expect(tree).toMatchSnapshot();
   });
