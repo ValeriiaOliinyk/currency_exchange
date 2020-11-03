@@ -1,5 +1,4 @@
 import React from "react";
-import renderer from "react-test-renderer";
 import "jest-styled-components";
 import { Container, Title } from "../../styled";
 import { ThemeProvider } from "styled-components";
@@ -14,15 +13,13 @@ import { shallow } from "enzyme";
 
 describe("Convert component renders correctly", () => {
   it("CurrencyRow component works", () => {
-    const tree = renderer
-      .create(
-        <ThemeProvider theme={Theme}>
-          <Provider store={store.store}>
-            <CurrencyRow />
-          </Provider>
-        </ThemeProvider>
-      )
-      .toJSON();
+    const tree = shallow(
+      <ThemeProvider theme={Theme}>
+        <Provider store={store.store}>
+          <CurrencyRow />
+        </Provider>
+      </ThemeProvider>
+    );
     expect(tree).toMatchSnapshot();
   });
 
@@ -32,7 +29,7 @@ describe("Convert component renders correctly", () => {
   });
 
   it("Renders correctly", () => {
-    const tree = renderer.create(<Title theme={theme}>Convert</Title>).toJSON();
+    const tree = shallow(<Title theme={theme}>Convert</Title>);
     expect(tree).toMatchSnapshot();
   });
 });
