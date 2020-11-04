@@ -1,4 +1,4 @@
-import { call, put, takeEvery, take } from "redux-saga/effects";
+import { call, put, takeEvery, select } from "redux-saga/effects";
 import { AppStateType } from "../store";
 import { createSelector } from "reselect";
 import { CurrencyTypes } from "../../helpers/interfaces";
@@ -246,10 +246,10 @@ export function* watchUpdateData(): Generator<object> {
 }
 
 export function* workerUpdateData() {
-  const { payload } = yield take(UPDATE_DATA);
+  let { from, to } = yield select(getDataUrl);
   let data;
-  if (payload.from !== "undefined" && payload.to !== "undefined") {
-    data = yield apiService.getUpdatedDatas(payload.from, payload.to);
+  if (from !== "undefined" && to !== "undefined") {
+    data = yield apiService.getUpdatedDatas(from, to);
   }
   yield put(getUpdatedDatas(data));
 }

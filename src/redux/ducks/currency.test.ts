@@ -141,4 +141,21 @@ describe("Check that sagas working", () => {
   it("should be done on next iteration", () => {
     expect(genObjectUpdate.next().done).toBeTruthy();
   });
+
+  test("It should update currency data", async () => {
+    const data = jest
+      .spyOn(apiService, "getUpdatedDatas")
+      .mockImplementation(() => Promise.resolve(currencyResponse));
+
+    const dispatched: any[] = [];
+
+    const fakeStore = {
+      dispatch: (action: any) => dispatched.push(action),
+    };
+
+    await runSaga(fakeStore, workerUpdateData).toPromise();
+
+    expect(dispatched[0]).toEqual(getUpdatedDatas(currencyResponse));
+    data.mockClear();
+  });
 });
