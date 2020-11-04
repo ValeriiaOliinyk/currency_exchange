@@ -2,7 +2,8 @@ import { call, put, takeEvery, select } from "redux-saga/effects";
 import { AppStateType } from "../store";
 import { createSelector } from "reselect";
 import { CurrencyTypes } from "../../helpers/interfaces";
-const BASE_URL = "https://api.exchangeratesapi.io/latest";
+import { apiService } from "../../api/service";
+export const BASE_URL = "https://api.exchangeratesapi.io/latest";
 
 // Selectors
 
@@ -104,7 +105,7 @@ type FetchCurrencyActionType = {
   payload?: object;
 };
 
-export function fetchCurrency(data: object): FetchCurrencyActionType {
+export function getData(data: object): FetchCurrencyActionType {
   return {
     type: FETCH_CURRENCY,
     payload: data,
@@ -238,16 +239,12 @@ export function* sagaWatcher(): Generator<object> {
   yield takeEvery(LOAD_DATA, sagaWorker);
 }
 
-function* sagaWorker(): object {
-  const data = yield call(fetchAvailableCurrency);
-  yield put(fetchCurrency(data));
+export function* sagaWorker(): any {
+  const data = yield call(apiService.getData);
+  yield put(getData(data));
 }
 
-function* fetchAvailableCurrency(): object {
-  return yield fetch(BASE_URL)
-    .then((response) => response.json())
-    .catch((err) => console.log(err));
-}
+// Razdelili
 
 export function* workerUpdateData(): object {
   const data = yield call(updateCurrency);
@@ -258,7 +255,7 @@ export function* watchUpdateData(): Generator<object> {
   yield takeEvery(UPDATE_DATA, workerUpdateData);
 }
 
-function* updateCurrency(): object {
+export function* updateCurrency(): object {
   let { from, to } = yield select(getDataUrl);
   if (from !== "undefined" && to !== "undefined") {
     return yield fetch(`${BASE_URL}?base=${from}&symbols=${to}`)

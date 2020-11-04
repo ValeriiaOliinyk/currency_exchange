@@ -1,7 +1,7 @@
 export interface CurrencyTypes {
   currency: any;
   base: string;
-  date: string;
+  data: string;
   rates: {
     [index: string]: any;
   };

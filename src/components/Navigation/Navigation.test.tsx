@@ -13,6 +13,8 @@ import {
   Logo,
   NavLinks,
 } from "../../styled";
+
+import { Navigation } from "../../components";
 import theme from "../../styles/theme";
 
 it("Navigation component renders correctly", () => {
@@ -38,4 +40,9 @@ it("Navigation component renders correctly", () => {
     </Header>
   );
   expect(tree).toMatchSnapshot();
+});
+
+it("Navigation component renders correctly with other components", () => {
+  const tree = shallow(<Navigation />);
+  expect(tree.find(Header).length).toBe(1);
 });
