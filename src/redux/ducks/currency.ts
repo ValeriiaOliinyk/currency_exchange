@@ -150,9 +150,7 @@ type FetchUpdatedCurrencyActionType = {
   payload: object;
 };
 
-export function fetchUpdatedCurrency(
-  data: object
-): FetchUpdatedCurrencyActionType {
+export function getUpdatedDatas(data: object): FetchUpdatedCurrencyActionType {
   return {
     type: FETCH_UPDATED_CURRENCY,
     payload: data,
@@ -239,27 +237,20 @@ export function* sagaWatcher(): Generator<object> {
   yield takeEvery(LOAD_DATA, sagaWorker);
 }
 
-export function* sagaWorker(): any {
+export function* sagaWorker() {
   const data = yield call(apiService.getData);
   yield put(getData(data));
-}
-
-// Razdelili
-
-export function* workerUpdateData(): object {
-  const data = yield call(updateCurrency);
-  yield put(fetchUpdatedCurrency(data));
 }
 
 export function* watchUpdateData(): Generator<object> {
   yield takeEvery(UPDATE_DATA, workerUpdateData);
 }
 
-export function* updateCurrency(): object {
+export function* workerUpdateData() {
   let { from, to } = yield select(getDataUrl);
+  let data;
   if (from !== "undefined" && to !== "undefined") {
-    return yield fetch(`${BASE_URL}?base=${from}&symbols=${to}`)
-      .then((response) => response.json())
-      .catch((err) => console.log(err));
+    data = yield apiService.getUpdatedDatas(from, to);
   }
+  yield put(getUpdatedDatas(data));
 }

@@ -7,16 +7,13 @@ import {
   updateDataReducer,
   updateData,
   putUpdatedDataReducer,
-  fetchUpdatedCurrency,
+  getUpdatedDatas,
   getData,
-  updateCurrency,
   getDataUrl,
-  BASE_URL,
   watchUpdateData,
   workerUpdateData,
   sagaWatcher,
   sagaWorker,
-  getCurrency,
 } from "./currency";
 import { runSaga } from "redux-saga";
 import expect from "expect";
@@ -87,11 +84,12 @@ it("It should update from and to currencies", () => {
 });
 
 it("It should add data", () => {
-  let action = fetchUpdatedCurrency({
+  let action = getUpdatedDatas({
     date: "30.10.2020",
     base: "UKR",
     rates: { value: "USD" },
   });
+
   let newState = putUpdatedDataReducer([], action);
   expect(newState).toStrictEqual({
     date: "30.10.2020",
@@ -117,10 +115,6 @@ describe("Check that sagas working", () => {
     expect(genObject.next().value).toEqual(takeEvery("LOAD_DATA", sagaWorker));
   });
 
-  it("Should be done on next iteration", () => {
-    expect(genObject.next().done).toBeTruthy();
-  });
-
   test("It should load currency data", async () => {
     const data = jest
       .spyOn(apiService, "getData")
@@ -142,5 +136,9 @@ describe("Check that sagas working", () => {
     expect(genObjectUpdate.next().value).toEqual(
       takeEvery("UPDATE_DATA", workerUpdateData)
     );
+  });
+
+  it("should be done on next iteration", () => {
+    expect(genObjectUpdate.next().done).toBeTruthy();
   });
 });
