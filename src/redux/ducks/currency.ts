@@ -1,9 +1,8 @@
-import { call, put, takeEvery, select } from "redux-saga/effects";
+import { call, put, takeEvery, take } from "redux-saga/effects";
 import { AppStateType } from "../store";
 import { createSelector } from "reselect";
 import { CurrencyTypes } from "../../helpers/interfaces";
 import { apiService } from "../../api/service";
-export const BASE_URL = "https://api.exchangeratesapi.io/latest";
 
 // Selectors
 
@@ -247,10 +246,10 @@ export function* watchUpdateData(): Generator<object> {
 }
 
 export function* workerUpdateData() {
-  let { from, to } = yield select(getDataUrl);
+  const { payload } = yield take(UPDATE_DATA);
   let data;
-  if (from !== "undefined" && to !== "undefined") {
-    data = yield apiService.getUpdatedDatas(from, to);
+  if (payload.from !== "undefined" && payload.to !== "undefined") {
+    data = yield apiService.getUpdatedDatas(payload.from, payload.to);
   }
   yield put(getUpdatedDatas(data));
 }
