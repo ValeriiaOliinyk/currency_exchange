@@ -49,6 +49,7 @@ export function CurrencyList() {
               <ItemContainer>
                 <Value>{item}</Value>
                 <BtnFavorite
+                  className="Btn"
                   type="button"
                   onClick={() => toggleFavAction(item)}
                 ></BtnFavorite>

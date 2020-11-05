@@ -1,32 +1,42 @@
 import React from "react";
-import { shallow, render, mount } from "enzyme";
+import * as reactRedux from "react-redux";
+import { shallow, ShallowWrapper } from "enzyme";
+import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
-
+import { currencyResponse } from "../../helpers/fakeResponse";
 import { CurrencyList } from "../../components";
-import store from "../../redux/store";
-import { Value } from "../../styled";
+import { ListFavorite } from "../../styled";
 
-const setUp = () =>
-  shallow(
-    <Provider store={store.store}>
-      <CurrencyList />
-    </Provider>
-  );
+const initialState = {
+  currency: currencyResponse,
+};
 
 describe("CurrencyList component renders correctly", async () => {
-  let component: any = null;
+  let wrapper: ShallowWrapper<any>;
+  let store: any = configureStore()(initialState);
+
   beforeEach(() => {
-    component = setUp();
+    jest
+      .spyOn(reactRedux, "useSelector")
+      .mockImplementation((state) => store.getState().getCurrency);
+    jest
+      .spyOn(reactRedux, "useDispatch")
+      .mockImplementation(() => store.dispatch);
+
+    wrapper = shallow(
+      <Provider store={store}>
+        <CurrencyList />
+      </Provider>
+    )
+      .dive()
+      .dive();
   });
 
   test("Component renders correctly", async () => {
-    expect(component).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 
-  // test("Component renders with Value component", () => {
-  //   console.log(component.debug());
-  //   expect(component.find("p")).toBe(1);
-  // });
+  it("Component renders with ListFavorite components", () => {
+    expect(wrapper.find(ListFavorite)).toHaveLength(2);
+  });
 });
-
-// Попробовать другую библиотеку
