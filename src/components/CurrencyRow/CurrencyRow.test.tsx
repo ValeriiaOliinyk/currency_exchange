@@ -3,14 +3,22 @@ import * as reactRedux from "react-redux";
 import { shallow, ShallowWrapper } from "enzyme";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
-import { currencyResponse } from "../../helpers/fakeResponse";
+import {
+  currencyResponse,
+  rates,
+  updatedData,
+  rate,
+} from "../../helpers/fakeResponse";
 import { CurrencyRow } from "../../components";
+
+import { Container } from "react-bootstrap";
+import { Formik } from "formik";
 
 const initialState = {
   currency: currencyResponse,
-  rates: { from: "EUR", to: "RUB" },
-  rate: 1.558,
-  updatedData: { base: "EUR", date: "2020-11-04", rates: { CAD: 1.5411 } },
+  rates,
+  rate,
+  updatedData,
 };
 
 describe("CurrencyRow component renders correctly", async () => {
@@ -45,5 +53,13 @@ describe("CurrencyRow component renders correctly", async () => {
 
   test("Component renders correctly", async () => {
     expect(tree).toMatchSnapshot();
+  });
+
+  it("Component renders with Container component", () => {
+    expect(tree.find(Container)).toHaveLength(1);
+  });
+
+  it("Component renders with Formik component", () => {
+    expect(tree.find(Formik)).toHaveLength(1);
   });
 });

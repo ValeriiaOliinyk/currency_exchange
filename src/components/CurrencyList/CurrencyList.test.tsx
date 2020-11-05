@@ -3,12 +3,22 @@ import * as reactRedux from "react-redux";
 import { shallow, ShallowWrapper } from "enzyme";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
-import { currencyResponse } from "../../helpers/fakeResponse";
+import {
+  currencyResponse,
+  rates,
+  updatedData,
+  rate,
+  favorite,
+} from "../../helpers/fakeResponse";
 import { CurrencyList } from "../../components";
 import { ListFavorite } from "../../styled";
 
 const initialState = {
   currency: currencyResponse,
+  rates,
+  updatedData,
+  rate,
+  favorite,
 };
 
 describe("CurrencyList component renders correctly", async () => {
@@ -19,6 +29,7 @@ describe("CurrencyList component renders correctly", async () => {
     jest
       .spyOn(reactRedux, "useSelector")
       .mockImplementation((state) => store.getState().getCurrency);
+
     jest
       .spyOn(reactRedux, "useDispatch")
       .mockImplementation(() => store.dispatch);

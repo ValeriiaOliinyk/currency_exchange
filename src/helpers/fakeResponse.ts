@@ -36,3 +36,23 @@ export const currencyResponse: any = {
     ZAR: 18.7681,
   },
 };
+
+export const rates = { from: "EUR", to: "RUB" };
+export const rate = 1.558;
+export const updatedData = {
+  base: "EUR",
+  date: "2020-11-04",
+  rates: { CAD: 1.5411 },
+};
+
+export const favorite = [
+  "ZAR",
+  "MXN",
+  "EUR",
+  "HKD",
+  "HUF",
+  "GBP",
+  "KRW",
+  "MYR",
+  "HRK",
+];
