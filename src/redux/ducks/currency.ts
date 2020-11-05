@@ -246,10 +246,11 @@ export function* watchUpdateData(): Generator<object> {
 }
 
 export function* workerUpdateData() {
-  let { from, to } = yield select(getDataUrl);
-  let data;
-  if (from !== "undefined" && to !== "undefined") {
-    data = yield apiService.getUpdatedDatas(from, to);
+  try {
+    let { from, to } = yield select(getDataUrl);
+    let data = yield call(() => apiService.getUpdatedDatas(from, to));
+    yield put(getUpdatedDatas(data));
+  } catch (error) {
+    console.log(error);
   }
-  yield put(getUpdatedDatas(data));
 }
