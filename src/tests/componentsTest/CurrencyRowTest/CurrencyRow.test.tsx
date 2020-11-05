@@ -3,16 +3,16 @@ import * as reactRedux from "react-redux";
 import { shallow, ShallowWrapper } from "enzyme";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
+import { Formik } from "formik";
+import { Container } from "react-bootstrap";
+
 import {
   currencyResponse,
   rates,
   updatedData,
   rate,
-} from "../../helpers/fakeResponse";
-import { CurrencyRow } from "../../components";
-
-import { Container } from "react-bootstrap";
-import { Formik } from "formik";
+} from "../../../helpers/fakeResponse";
+import { CurrencyRow } from "../../../components";
 
 const initialState = {
   currency: currencyResponse,

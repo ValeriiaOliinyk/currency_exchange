@@ -1,10 +1,11 @@
 import React, { Suspense, lazy } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
-import routes from "./routes";
+import { ThemeProvider } from "styled-components";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { ThemeProvider } from "styled-components";
+import routes from "./routes";
+
 import Theme from "./styles/theme";
 
 // Components

@@ -1,9 +1,9 @@
 import React from "react";
-import { shallow } from "enzyme";
 import "jest-styled-components";
-
-import { LoaderMain } from "../../styled";
+import { shallow } from "enzyme";
 import Loader from "react-loader-spinner";
+
+import { LoaderMain } from "../../../styled";
 
 it("MainLoader component works", () => {
   const tree = shallow(

@@ -1,3 +1,7 @@
+import { runSaga } from "redux-saga";
+import expect from "expect";
+import { takeEvery } from "redux-saga/effects";
+
 import {
   exchangeRateReducer,
   addExchangeRate,
@@ -14,12 +18,9 @@ import {
   workerUpdateData,
   sagaWatcher,
   sagaWorker,
-} from "./currency";
-import { runSaga } from "redux-saga";
-import expect from "expect";
-import { takeEvery } from "redux-saga/effects";
-import { apiService } from "../../api/service";
-import { currencyResponse } from "../../helpers/fakeResponse";
+} from "../../../redux/ducks/currency";
+import { apiService } from "../../../api/service";
+import { currencyResponse } from "../../../helpers/fakeResponse";
 
 it("Exchange rate should be changed to 209", () => {
   let action = addExchangeRate(209);
@@ -59,8 +60,6 @@ it("It should add data", () => {
     rates: { value: "USD" },
   });
 });
-
-// Saga test
 
 describe("Check that sagas working", () => {
   const genObject = sagaWatcher();

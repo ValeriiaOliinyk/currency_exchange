@@ -1,6 +1,7 @@
 import { call, put, takeEvery, select } from "redux-saga/effects";
-import { AppStateType } from "../store";
 import { createSelector } from "reselect";
+
+import { AppStateType } from "../store";
 import { CurrencyTypes } from "../../helpers/interfaces";
 import { apiService } from "../../api/service";
 

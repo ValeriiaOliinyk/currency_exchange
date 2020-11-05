@@ -3,15 +3,17 @@ import * as reactRedux from "react-redux";
 import { shallow, ShallowWrapper } from "enzyme";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
+
 import {
   currencyResponse,
   rates,
   updatedData,
   rate,
   favorite,
-} from "../../helpers/fakeResponse";
-import { CurrencyList } from "../../components";
-import { ListFavorite } from "../../styled";
+} from "../../../helpers/fakeResponse";
+
+import { CurrencyList } from "../../../components";
+import { ListFavorite } from "../../../styled";
 
 const initialState = {
   currency: currencyResponse,
@@ -24,7 +26,6 @@ const initialState = {
 describe("CurrencyList component renders correctly", async () => {
   let wrapper: ShallowWrapper<any>;
   let store: any = configureStore()(initialState);
-
   beforeEach(() => {
     jest
       .spyOn(reactRedux, "useSelector")

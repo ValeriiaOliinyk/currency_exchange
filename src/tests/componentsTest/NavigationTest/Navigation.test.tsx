@@ -1,8 +1,9 @@
 import React from "react";
+import "jest-styled-components";
 import { shallow } from "enzyme";
 import { BrowserRouter } from "react-router-dom";
-import "jest-styled-components";
-import routes from "../../routes";
+
+import routes from "../../../routes";
 
 // Components
 import {
@@ -12,10 +13,10 @@ import {
   NavigationItems,
   Logo,
   NavLinks,
-} from "../../styled";
+} from "../../../styled";
+import { Navigation } from "../../../components";
 
-import { Navigation } from "../../components";
-import theme from "../../styles/theme";
+import theme from "../../../styles/theme";
 
 it("Navigation component renders correctly", () => {
   const tree = shallow(

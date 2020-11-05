@@ -1,15 +1,15 @@
 import React from "react";
 import "jest-styled-components";
-import { Container, Title } from "../../styled";
-import { ThemeProvider } from "styled-components";
-import Theme from "../../styles/theme";
-import { Provider } from "react-redux";
-import store from "../../redux/store";
-
-import { CurrencyRow } from "../CurrencyRow/CurrencyRow";
-
-import theme from "../../styles/theme";
 import { shallow } from "enzyme";
+import { Provider } from "react-redux";
+import { ThemeProvider } from "styled-components";
+
+import store from "../../../redux/store";
+import theme from "../../../styles/theme";
+
+import { Container, Title } from "../../../styled";
+import { CurrencyRow } from "../../../components";
+import Theme from "../../../styles/theme";
 
 it("CurrencyRow component works", () => {
   const tree = shallow(

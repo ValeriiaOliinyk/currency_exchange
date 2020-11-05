@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
+
 import { loadData, getNumberOfFavorites } from "../../redux/ducks/currency";
 
 // Components
