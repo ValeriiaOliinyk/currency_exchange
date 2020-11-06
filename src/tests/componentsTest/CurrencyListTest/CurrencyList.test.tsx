@@ -1,6 +1,6 @@
 import React from "react";
 import * as reactRedux from "react-redux";
-import { shallow, ShallowWrapper, render, mount } from "enzyme";
+import { shallow, ShallowWrapper } from "enzyme";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 

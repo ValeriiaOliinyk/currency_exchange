@@ -1,5 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`CurrencyList component renders correctly Buttons click should work 1`] = `
+<section
+  className="sc-gtssRu dspGEk"
+  type="button"
+/>
+`;
+
 exports[`CurrencyList component renders correctly Component renders correctly 1`] = `
 <Fragment>
   <styled.ul
@@ -127,33 +134,4 @@ exports[`CurrencyList component renders correctly Component renders correctly 1`
     </styled.li>
   </styled.ul>
 </Fragment>
-`;
-
-exports[`Test 1`] = `
-<Component
-  theme={
-    Object {
-      "breakpoints": Object {
-        "mobileL": "screen and (max-width: 425px)",
-        "tablet": "screen and (max-width: 768px)",
-      },
-      "colors": Object {
-        "black": "#000000",
-        "dark": "#56809b",
-        "hover": "#67a030",
-        "main": "#a6dbfb",
-        "red": "#800000",
-        "text": "#0e2b3c",
-        "transparent": "#ffffff00",
-        "white": "#ffffff",
-      },
-    }
-  }
->
-  <styled.p>
-    <p
-      className="sc-kfYqjs eSOltQ"
-    />
-  </styled.p>
-</Component>
 `;
