@@ -1,6 +1,6 @@
 import React from "react";
 import * as reactRedux from "react-redux";
-import { shallow, ShallowWrapper } from "enzyme";
+import { shallow, ShallowWrapper, render, mount } from "enzyme";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 
@@ -30,6 +30,9 @@ describe("CurrencyList component renders correctly", async () => {
     jest
       .spyOn(reactRedux, "useSelector")
       .mockImplementation((state) => store.getState().getCurrency);
+    jest
+      .spyOn(reactRedux, "useSelector")
+      .mockImplementation((state) => store.getState().favorite);
 
     jest
       .spyOn(reactRedux, "useDispatch")

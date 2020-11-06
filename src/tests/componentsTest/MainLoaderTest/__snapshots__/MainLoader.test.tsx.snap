@@ -1,3 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MainLoader component works 1`] = `ShallowWrapper {}`;
+exports[`MainLoader component works 1`] = `
+.c0 {
+  width: 100%;
+  margin: auto;
+  margin-top: 100px;
+  text-align: center;
+}
+
+<div
+  className="c0"
+>
+  <Loader
+    className=""
+    color="#a6dbfb"
+    height={80}
+    style={Object {}}
+    timeout={0}
+    type="Oval"
+    visible={true}
+    width={80}
+  />
+</div>
+`;
