@@ -1,8 +1,9 @@
 import { call, put, takeEvery, select } from "redux-saga/effects";
-import { AppStateType } from "../store";
 import { createSelector } from "reselect";
+
+import { AppStateType } from "../store";
 import { CurrencyTypes } from "../../helpers/interfaces";
-const BASE_URL = "https://api.exchangeratesapi.io/latest";
+import { apiService } from "../../api/service";
 
 // Selectors
 
@@ -104,7 +105,7 @@ type FetchCurrencyActionType = {
   payload?: object;
 };
 
-export function fetchCurrency(data: object): FetchCurrencyActionType {
+export function getData(data: object): FetchCurrencyActionType {
   return {
     type: FETCH_CURRENCY,
     payload: data,
@@ -149,9 +150,7 @@ type FetchUpdatedCurrencyActionType = {
   payload: object;
 };
 
-export function fetchUpdatedCurrency(
-  data: object
-): FetchUpdatedCurrencyActionType {
+export function getUpdatedDatas(data: object): FetchUpdatedCurrencyActionType {
   return {
     type: FETCH_UPDATED_CURRENCY,
     payload: data,
@@ -238,31 +237,21 @@ export function* sagaWatcher(): Generator<object> {
   yield takeEvery(LOAD_DATA, sagaWorker);
 }
 
-function* sagaWorker(): object {
-  const data = yield call(fetchAvailableCurrency);
-  yield put(fetchCurrency(data));
-}
-
-function* fetchAvailableCurrency(): object {
-  return yield fetch(BASE_URL)
-    .then((response) => response.json())
-    .catch((err) => console.log(err));
-}
-
-export function* workerUpdateData(): object {
-  const data = yield call(updateCurrency);
-  yield put(fetchUpdatedCurrency(data));
+export function* sagaWorker() {
+  const data = yield call(apiService.getData);
+  yield put(getData(data));
 }
 
 export function* watchUpdateData(): Generator<object> {
   yield takeEvery(UPDATE_DATA, workerUpdateData);
 }
 
-function* updateCurrency(): object {
-  let { from, to } = yield select(getDataUrl);
-  if (from !== "undefined" && to !== "undefined") {
-    return yield fetch(`${BASE_URL}?base=${from}&symbols=${to}`)
-      .then((response) => response.json())
-      .catch((err) => console.log(err));
+export function* workerUpdateData() {
+  try {
+    let { from, to } = yield select(getDataUrl);
+    let data = yield call(() => apiService.getUpdatedDatas(from, to));
+    yield put(getUpdatedDatas(data));
+  } catch (error) {
+    console.log(error);
   }
 }

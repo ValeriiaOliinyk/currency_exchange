@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
+
 import {
   addFavorite,
   deleteFavorite,
@@ -49,6 +50,7 @@ export function CurrencyList() {
               <ItemContainer>
                 <Value>{item}</Value>
                 <BtnFavorite
+                  className="Btn"
                   type="button"
                   onClick={() => toggleFavAction(item)}
                 ></BtnFavorite>
