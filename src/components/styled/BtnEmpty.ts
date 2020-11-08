@@ -11,7 +11,7 @@ export const BtnEmpty = styled.section<BtnEmptyProps>`
   }
   width: 20px;
   height: 20px;
-  background-image: url(${`${window.location.origin}/images/starEmpty.svg`});
+  background-image: url("./images/starEmpty.svg");
   background-repeat: no-repeat;
   background-size: cover;
 `;
