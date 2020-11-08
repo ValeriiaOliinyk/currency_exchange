@@ -25,7 +25,6 @@ import {
   FormControl,
   FormSelect,
   ErrorMessage,
-  Image,
 } from "./styled";
 
 // Styles
@@ -132,7 +131,7 @@ export function CurrencyRow() {
             ) : (
               <ErrorMessage transparent>Transparent</ErrorMessage>
             )}
-            <Image src="./images/equal.svg" alt="equal" />
+            <FormEqually />
             <FormBox>
               <FormControl
                 type="number"

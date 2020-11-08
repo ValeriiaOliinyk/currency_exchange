@@ -25,4 +25,3 @@ export { Title } from "./Title";
 export { TitleHome } from "./TitleHome";
 export { Value } from "./Value";
 export { ErrorMessage } from "./ErrorMessage";
-export { Image } from "./Image";
