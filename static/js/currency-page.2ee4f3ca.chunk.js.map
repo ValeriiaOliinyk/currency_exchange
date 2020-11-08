@@ -1,0 +1,1 @@
+{"version":3,"sources":["pages/Currency.tsx"],"names":["Currency"],"mappings":"wHAAA,2EAKe,SAASA,IACtB,OAAO,kBAAC,IAAD","file":"static/js/currency-page.2ee4f3ca.chunk.js","sourcesContent":["import React from \"react\";\r\n\r\n// Components\r\nimport { Convert } from \"../components\";\r\n\r\nexport default function Currency() {\r\n  return <Convert />;\r\n}\r\n"],"sourceRoot":""}

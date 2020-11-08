@@ -1,2 +1,0 @@
-(this.webpackJsonpcurrency_exchange=this.webpackJsonpcurrency_exchange||[]).push([[0],{97:function(n,e,c){"use strict";c.r(e),c.d(e,"default",(function(){return a}));var r=c(0),t=c.n(r),u=c(37);function a(){return t.a.createElement(u.a,null)}}}]);
-//# sourceMappingURL=currency-page.7d62bf04.chunk.js.map
