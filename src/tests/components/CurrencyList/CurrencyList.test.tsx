@@ -13,7 +13,7 @@ import {
 } from "../../../helpers/fakeResponse";
 
 import { CurrencyList } from "../../../components";
-import { ListFavorite } from "../../../components/styled";
+import { ListFavorite } from "../../../styles/components";
 
 const initialState = {
   currency: currencyResponse,

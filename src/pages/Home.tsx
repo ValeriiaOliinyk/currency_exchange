@@ -12,7 +12,7 @@ import {
   Favorite,
   TitleHome,
   Main,
-} from "../components/styled";
+} from "../styles/components";
 
 export default function Home() {
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import React from "react";
 import Loader from "react-loader-spinner";
 
-import { LoaderMain } from "./styled";
+import { LoaderMain } from "../styles/components";
 
 export const MainLoader = () => (
   <LoaderMain>

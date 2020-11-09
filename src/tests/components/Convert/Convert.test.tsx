@@ -7,7 +7,7 @@ import { ThemeProvider } from "styled-components";
 import store from "../../../redux/store";
 import theme from "../../../styles/theme";
 
-import { Container, Title } from "../../../components/styled";
+import { Container, Title } from "../../../styles/components";
 import { CurrencyRow } from "../../../components";
 import Theme from "../../../styles/theme";
 

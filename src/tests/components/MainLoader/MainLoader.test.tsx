@@ -3,7 +3,7 @@ import "jest-styled-components";
 import { shallow } from "enzyme";
 import Loader from "react-loader-spinner";
 
-import { LoaderMain } from "../../../components/styled";
+import { LoaderMain } from "../../../styles/components";
 
 it("MainLoader component works", () => {
   const tree = shallow(

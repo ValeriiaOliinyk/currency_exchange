@@ -10,7 +10,7 @@ import {
   NavigationItems,
   Logo,
   NavLinks,
-} from "./styled";
+} from "../styles/components";
 
 export function Navigation() {
   return (

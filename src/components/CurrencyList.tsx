@@ -19,7 +19,7 @@ import {
   ItemFavorites,
   ItemContainer,
   Value,
-} from "./styled";
+} from "../styles/components";
 
 export function CurrencyList() {
   const dispatch = useDispatch();

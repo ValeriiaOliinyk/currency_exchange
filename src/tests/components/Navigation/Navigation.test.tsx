@@ -3,7 +3,7 @@ import "jest-styled-components";
 import { shallow } from "enzyme";
 
 // Components
-import { Header } from "../../../components/styled";
+import { Header } from "../../../styles/components";
 import { Navigation } from "../../../components";
 
 it("Navigation component renders correctly", () => {

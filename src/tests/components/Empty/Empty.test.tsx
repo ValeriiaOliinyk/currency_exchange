@@ -2,7 +2,7 @@ import React from "react";
 import "jest-styled-components";
 import { shallow } from "enzyme";
 
-import { EmptyFavorites } from "../../../components/styled";
+import { EmptyFavorites } from "../../../styles/components";
 import theme from "../../../styles/theme";
 
 it("EmptyFavorites component works", () => {

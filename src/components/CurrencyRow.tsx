@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import PropTypes from "prop-types";
+import { Formik } from "formik";
 import {
   loadData,
   getCurrencyArray,
@@ -10,8 +12,6 @@ import {
   getUpdatedData,
   addExchangeRate,
 } from "../redux/ducks/currency";
-import PropTypes from "prop-types";
-import { Formik } from "formik";
 
 import { validationSchema } from "../helpers/validation";
 import { InitialValues, CurrencyTypes } from "../helpers/interfaces";
@@ -25,7 +25,7 @@ import {
   FormControl,
   FormSelect,
   ErrorMessage,
-} from "./styled";
+} from "../styles/components";
 
 // Styles
 import { Container } from "react-bootstrap";
