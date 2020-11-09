@@ -1,3 +1,4 @@
+/* eslint-disable jest/valid-describe */
 import React from "react";
 import * as reactRedux from "react-redux";
 import { shallow, ShallowWrapper } from "enzyme";
