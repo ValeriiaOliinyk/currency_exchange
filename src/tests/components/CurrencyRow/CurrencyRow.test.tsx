@@ -1,19 +1,20 @@
 /* eslint-disable jest/valid-describe */
-import React from "react";
-import * as reactRedux from "react-redux";
-import { shallow, ShallowWrapper } from "enzyme";
-import configureStore from "redux-mock-store";
-import { Provider } from "react-redux";
-import { Formik } from "formik";
-import { Container } from "react-bootstrap";
+import React from 'react';
+import configureStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { ThemeProvider } from 'styled-components';
+import userEvent from '@testing-library/user-event';
 
 import {
   currencyResponse,
   rates,
   updatedData,
   rate,
-} from "../../../helpers/fakeResponse";
-import { CurrencyRow } from "../../../components";
+} from '../../../helpers/fakeResponse';
+import { CurrencyRow } from '../../../components';
+
+import Theme from '../../../styles/theme';
 
 const initialState = {
   currency: currencyResponse,
@@ -22,45 +23,27 @@ const initialState = {
   updatedData,
 };
 
-describe("CurrencyRow component renders correctly", async () => {
-  let tree: ShallowWrapper<any>;
+it('Renders with option elements', async () => {
   let store: any = configureStore()(initialState);
-  beforeEach(() => {
-    jest
-      .spyOn(reactRedux, "useSelector")
-      .mockImplementation((state) => store.getState().getCurrency);
-    jest
-      .spyOn(reactRedux, "useSelector")
-      .mockImplementation((state) => store.getState().updatedData);
-    jest
-      .spyOn(reactRedux, "useSelector")
-      .mockImplementation((state) => store.getState().currency);
-    jest
-      .spyOn(reactRedux, "useSelector")
-      .mockImplementation((state) => store.getState().rates);
-
-    jest
-      .spyOn(reactRedux, "useDispatch")
-      .mockImplementation(() => store.dispatch);
-
-    tree = shallow(
-      <Provider store={store}>
+  const { findAllByRole } = render(
+    <Provider store={store}>
+      <ThemeProvider theme={Theme}>
         <CurrencyRow />
-      </Provider>
-    )
-      .dive()
-      .dive();
-  });
+      </ThemeProvider>
+    </Provider>,
+  );
 
-  test("Component renders correctly", async () => {
-    expect(tree).toMatchSnapshot();
-  });
+  const options = await findAllByRole('option');
+  expect(options).toHaveLength(66);
+});
 
-  it("Component renders with Container component", () => {
-    expect(tree.find(Container)).toHaveLength(1);
-  });
-
-  it("Component renders with Formik component", () => {
-    expect(tree.find(Formik)).toHaveLength(1);
-  });
+it('Renders select elements', async () => {
+  let store: any = configureStore()(initialState);
+  const { getByRole } = render(
+    <Provider store={store}>
+      <ThemeProvider theme={Theme}>
+        <CurrencyRow />
+      </ThemeProvider>
+    </Provider>,
+  );
 });

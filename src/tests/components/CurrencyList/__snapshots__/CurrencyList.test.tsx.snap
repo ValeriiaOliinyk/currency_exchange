@@ -1,12 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CurrencyList component renders correctly Buttons click should work 1`] = `
-<section
-  className="sc-gtssRu dspGEk"
-  type="button"
-/>
-`;
-
 exports[`CurrencyList component renders correctly Component renders correctly 1`] = `
 <Fragment>
   <styled.ul

@@ -1,33 +1,21 @@
-import React from "react";
-import "jest-styled-components";
-import { shallow } from "enzyme";
-import { Provider } from "react-redux";
-import { ThemeProvider } from "styled-components";
+import React from 'react';
+import { Provider } from 'react-redux';
+import { ThemeProvider } from 'styled-components';
+import { render, screen } from '@testing-library/react';
 
-import store from "../../../redux/store";
-import theme from "../../../styles/theme";
+import store from '../../../redux/store';
 
-import { Container, Title } from "../../../styles/components";
-import { CurrencyRow } from "../../../components";
-import Theme from "../../../styles/theme";
+import { Convert } from '../../../components';
+import Theme from '../../../styles/theme';
 
-it("CurrencyRow component works", () => {
-  const tree = shallow(
+it('renders with text', () => {
+  render(
     <ThemeProvider theme={Theme}>
       <Provider store={store.store}>
-        <CurrencyRow />
+        <Convert />
       </Provider>
-    </ThemeProvider>
+    </ThemeProvider>,
   );
-  expect(tree).toMatchSnapshot();
-});
-
-it("Container component works", () => {
-  const tree = shallow(<Container />);
-  expect(tree).toMatchSnapshot();
-});
-
-it("Renders correctly", () => {
-  const tree = shallow(<Title theme={theme}>Convert</Title>);
-  expect(tree).toMatchSnapshot();
+  screen.debug();
+  expect(screen.getByText('Convert')).toBeInTheDocument();
 });
