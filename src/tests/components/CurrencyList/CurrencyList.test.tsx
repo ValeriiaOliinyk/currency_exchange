@@ -1,58 +1,36 @@
-/* eslint-disable jest/valid-describe */
-import React from "react";
-import * as reactRedux from "react-redux";
-import { shallow, ShallowWrapper } from "enzyme";
-import configureStore from "redux-mock-store";
-import { Provider } from "react-redux";
+import React from 'react';
+import configureStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
+import { render } from '@testing-library/react';
+import { ThemeProvider } from 'styled-components';
 
 import {
   currencyResponse,
   rates,
   updatedData,
   rate,
-  favorite,
-} from "../../../helpers/fakeResponse";
+} from '../../../helpers/fakeResponse';
+import { CurrencyList } from '../../../components';
 
-import { CurrencyList } from "../../../components";
-import { ListFavorite } from "../../../styles/components";
+import Theme from '../../../styles/theme';
 
 const initialState = {
   currency: currencyResponse,
   rates,
-  updatedData,
   rate,
-  favorite,
+  updatedData,
 };
 
-describe("CurrencyList component renders correctly", async () => {
-  let wrapper: ShallowWrapper<any>;
+it('Renders with option elements', async () => {
   let store: any = configureStore()(initialState);
-  beforeEach(() => {
-    jest
-      .spyOn(reactRedux, "useSelector")
-      .mockImplementation((state) => store.getState().getCurrency);
-    jest
-      .spyOn(reactRedux, "useSelector")
-      .mockImplementation((state) => store.getState().favorite);
-
-    jest
-      .spyOn(reactRedux, "useDispatch")
-      .mockImplementation(() => store.dispatch);
-
-    wrapper = shallow(
-      <Provider store={store}>
+  const { findAllByRole } = render(
+    <Provider store={store}>
+      <ThemeProvider theme={Theme}>
         <CurrencyList />
-      </Provider>
-    )
-      .dive()
-      .dive();
-  });
+      </ThemeProvider>
+    </Provider>,
+  );
 
-  test("Component renders correctly", async () => {
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it("Component renders with ListFavorite components", () => {
-    expect(wrapper.find(ListFavorite)).toHaveLength(2);
-  });
+  const options = await findAllByRole('list');
+  expect(options).toHaveLength(2);
 });

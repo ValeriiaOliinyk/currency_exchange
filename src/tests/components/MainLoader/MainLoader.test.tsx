@@ -1,15 +1,18 @@
-import React from "react";
-import "jest-styled-components";
-import { shallow } from "enzyme";
-import Loader from "react-loader-spinner";
+import React from 'react';
+import { render } from '@testing-library/react';
+import { ThemeProvider } from 'styled-components';
 
-import { LoaderMain } from "../../../styles/components";
+import { MainLoader } from '../../../components';
 
-it("MainLoader component works", () => {
-  const tree = shallow(
-    <LoaderMain>
-      <Loader type="Oval" color="#a6dbfb" height={80} width={80} />
-    </LoaderMain>
+import Theme from '../../../styles/theme';
+
+it('Renders with option elements', async () => {
+  const { findAllByRole } = render(
+    <ThemeProvider theme={Theme}>
+      <MainLoader />
+    </ThemeProvider>,
   );
-  expect(tree).toMatchSnapshot();
+
+  const loader = await findAllByRole('loader');
+  expect(loader).toHaveLength(1);
 });

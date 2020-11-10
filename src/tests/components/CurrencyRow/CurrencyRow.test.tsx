@@ -1,10 +1,8 @@
-/* eslint-disable jest/valid-describe */
 import React from 'react';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
-import userEvent from '@testing-library/user-event';
 
 import {
   currencyResponse,
@@ -35,15 +33,4 @@ it('Renders with option elements', async () => {
 
   const options = await findAllByRole('option');
   expect(options).toHaveLength(66);
-});
-
-it('Renders select elements', async () => {
-  let store: any = configureStore()(initialState);
-  const { getByRole } = render(
-    <Provider store={store}>
-      <ThemeProvider theme={Theme}>
-        <CurrencyRow />
-      </ThemeProvider>
-    </Provider>,
-  );
 });
