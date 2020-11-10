@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 
 import {
@@ -77,14 +76,3 @@ export function CurrencyList() {
     </>
   );
 }
-
-CurrencyList.defaultProps = {
-  numberOfFavorites: 0,
-  favorites: [],
-};
-
-CurrencyList.propTypes = {
-  numberOfFavorites: PropTypes.number,
-  favorites: PropTypes.arrayOf(PropTypes.string),
-  regularCurrency: PropTypes.arrayOf(PropTypes.string),
-};

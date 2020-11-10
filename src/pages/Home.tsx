@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { loadData, getFavorites } from '../redux/ducks/currency';
@@ -37,11 +36,3 @@ export default function Home() {
     </Main>
   );
 }
-
-Home.defaultProps = {
-  numberOfFavorites: 0,
-};
-
-Home.propTypes = {
-  numberOfFavorites: PropTypes.number,
-};
