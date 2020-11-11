@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { loadData, getFavorites } from '../redux/ducks/currency';
+import { loadData, getFavorites } from "../redux/ducks/currency";
 
 // Components
-import { CurrencyList, Gallery } from '../components';
+import { CurrencyList, Gallery } from "../components";
 import {
   MainTitle,
   Container,
   Favorite,
   TitleHome,
-  Main,
-} from '../styles/components';
+  Main
+} from "../styles/components";
 
-export default function Home() {
+const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,4 +36,6 @@ export default function Home() {
       </Container>
     </Main>
   );
-}
+};
+
+export default Home;

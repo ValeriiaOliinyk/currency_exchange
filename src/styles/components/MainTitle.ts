@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const MainTitle = styled.h1`
   @media ${({ theme }) => theme.breakpoints.tablet} {
@@ -8,5 +8,5 @@ export const MainTitle = styled.h1`
   font-size: 34px;
   font-weight: 700;
   margin-bottom: 40px;
-  color: ${props => props.theme.colors.hover};
+  color: ${(props) => props.theme.colors.hover};
 `;

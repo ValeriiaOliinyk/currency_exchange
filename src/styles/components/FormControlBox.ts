@@ -1,5 +1,5 @@
-import FormControl from '@material-ui/core/FormControl';
-import styled from 'styled-components';
+import FormControl from "@material-ui/core/FormControl";
+import styled from "styled-components";
 
 export const FormControlBox = styled(FormControl)`
   & .MuiFilledInput-underline:after {
@@ -7,6 +7,6 @@ export const FormControlBox = styled(FormControl)`
   }
 
   & .MuiInputBase-root {
-    background-color: ${props => props.theme.colors.main};
+    background-color: ${(props) => props.theme.colors.main};
   }
 `;
