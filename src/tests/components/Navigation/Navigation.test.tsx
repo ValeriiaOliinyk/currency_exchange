@@ -1,17 +1,22 @@
-import React from "react";
-import "jest-styled-components";
-import { shallow } from "enzyme";
+import React from 'react';
+import 'jest-styled-components';
+import { render, screen } from '@testing-library/react';
+import { ThemeProvider } from 'styled-components';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 // Components
-import { Header } from "../../../styles/components";
-import { Navigation } from "../../../components";
+import { Navigation } from '../../../components';
 
-it("Navigation component renders correctly", () => {
-  const tree = shallow(<Navigation />);
-  expect(tree).toMatchSnapshot();
-});
+import Theme from '../../../styles/theme';
 
-it("Navigation component renders correctly with other components", () => {
-  const tree = shallow(<Navigation />);
-  expect(tree.find(Header).length).toBe(1);
+it('Renders with text', () => {
+  render(
+    <Router>
+      <ThemeProvider theme={Theme}>
+        <Navigation />
+      </ThemeProvider>
+    </Router>,
+  );
+  screen.debug();
+  expect(screen.getByText('Home')).toBeInTheDocument();
 });

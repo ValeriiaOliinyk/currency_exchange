@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import PropTypes from "prop-types";
-import { Formik } from "formik";
+import React, { useState, useEffect, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Formik } from 'formik';
 import {
   loadData,
   getCurrencyArray,
@@ -11,10 +10,10 @@ import {
   updateData,
   getUpdatedData,
   addExchangeRate,
-} from "../redux/ducks/currency";
+} from '../redux/ducks/currency';
 
-import { validationSchema } from "../helpers/validation";
-import { InitialValues, CurrencyTypes } from "../helpers/interfaces";
+import { validationSchema } from '../helpers/validation';
+import { InitialValues, CurrencyTypes } from '../helpers/interfaces';
 
 // Components
 import {
@@ -25,10 +24,10 @@ import {
   FormControl,
   FormSelect,
   ErrorMessage,
-} from "../styles/components";
+} from '../styles/components';
 
 // Styles
-import { Container } from "react-bootstrap";
+import { Container } from 'react-bootstrap';
 
 export function CurrencyRow() {
   const dispatch = useDispatch();
@@ -43,17 +42,17 @@ export function CurrencyRow() {
   const updatedData: CurrencyTypes = useSelector(getUpdatedData);
 
   const [fromCurrency, setFromCurrency] = useState<string | undefined>(
-    selectedFromCurrency
+    selectedFromCurrency,
   );
   const [toCurrency, setToCurrency] = useState<string | undefined>(
-    selectedToCurrency
+    selectedToCurrency,
   );
   const [exchangeRate, setExchangeRate] = useState<number>(
-    selectedExchangeRate
+    selectedExchangeRate,
   );
   const [amount, setAmount] = useState<number>(1);
   const [amountInFromCurrency, setAmountInFromCurrency] = useState<boolean>(
-    true
+    true,
   );
 
   const firstExchange = useRef<number>(exchangeRate);
@@ -119,7 +118,7 @@ export function CurrencyRow() {
                 }) => setFromCurrency(e.target.value)}
               >
                 {currency &&
-                  currency.map((item) => (
+                  currency.map(item => (
                     <Option key={item} value={item}>
                       {item}
                     </Option>
@@ -152,7 +151,7 @@ export function CurrencyRow() {
                 }) => setToCurrency(e.target.value)}
               >
                 {currency &&
-                  currency.map((item) => (
+                  currency.map(item => (
                     <Option key={item} value={item}>
                       {item}
                     </Option>
@@ -170,17 +169,3 @@ export function CurrencyRow() {
     </Container>
   );
 }
-
-CurrencyRow.defaultProps = {
-  currency: [],
-  selectedFromCurrency: "",
-  selectedToCurrency: "",
-  selectedExchangeRate: 0,
-};
-
-CurrencyRow.propTypes = {
-  currency: PropTypes.arrayOf(PropTypes.string),
-  selectedFromCurrency: PropTypes.string,
-  selectedToCurrency: PropTypes.string,
-  selectedExchangeRate: PropTypes.number,
-};

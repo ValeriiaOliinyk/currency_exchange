@@ -1,9 +1,9 @@
-import { call, put, takeEvery, select } from "redux-saga/effects";
-import { createSelector } from "reselect";
+import { call, put, takeEvery, select } from 'redux-saga/effects';
+import { createSelector } from 'reselect';
 
-import { AppStateType } from "../store";
-import { CurrencyTypes } from "../../helpers/interfaces";
-import { apiService } from "../../api/service";
+import { AppStateType } from '../store';
+import { CurrencyTypes } from '../../helpers/interfaces';
+import { apiService } from '../../api/service';
 
 // Selectors
 
@@ -15,7 +15,7 @@ export const getCurrencyArray = createSelector(
     if (currency.rates && currency.base) {
       return [currency.base, ...Object.keys(currency.rates)];
     }
-  }
+  },
 );
 
 export const getFromCurrency = createSelector(
@@ -24,7 +24,7 @@ export const getFromCurrency = createSelector(
     if (currency.base) {
       return currency.base;
     }
-  }
+  },
 );
 
 export const getToCurrency = createSelector(
@@ -33,21 +33,18 @@ export const getToCurrency = createSelector(
     if (currency.rates) {
       return Object.keys(currency.rates)[0];
     }
-  }
+  },
 );
 
 export const getFavorites = (state: AppStateType) => state.favorite;
 
-export const getNumberOfFavorites = (state: AppStateType) =>
-  state.favorite.length;
-
 export const getRegularCurrency = createSelector(
   [getCurrencyArray, getFavorites],
   (currency: Array<string> | undefined, favorites: Array<string>) => {
-    if (currency) {
+    if (currency && favorites) {
       return currency.filter((item: string) => favorites.indexOf(item) === -1);
     }
-  }
+  },
 );
 
 export const getExchangeRate = (state: AppStateType) => state.rate;
@@ -56,13 +53,13 @@ export const getUpdatedData = (state: AppStateType) => state.updatedData;
 
 // Actions
 
-export const EXCHANGE_RATE = "EXCHANGE_RATE";
-export const ADD_FAV = "ADD_FAV";
-export const DELETE_FAV = "DELETE_FAV";
-export const FETCH_CURRENCY = "FETCH_CURRENCY";
-export const LOAD_DATA = "LOAD_DATA";
-export const UPDATE_DATA = "UPDATE_DATA";
-export const FETCH_UPDATED_CURRENCY = "FETCH_UPDATED_CURRENCY";
+export const EXCHANGE_RATE = 'EXCHANGE_RATE';
+export const ADD_FAV = 'ADD_FAV';
+export const DELETE_FAV = 'DELETE_FAV';
+export const FETCH_CURRENCY = 'FETCH_CURRENCY';
+export const LOAD_DATA = 'LOAD_DATA';
+export const UPDATE_DATA = 'UPDATE_DATA';
+export const FETCH_UPDATED_CURRENCY = 'FETCH_UPDATED_CURRENCY';
 
 type AddFavoriteActionType = {
   type: typeof ADD_FAV;
@@ -134,7 +131,7 @@ type UpdateDataActionType = {
 
 export function updateData(
   first: string,
-  second: string
+  second: string,
 ): UpdateDataActionType {
   return {
     type: UPDATE_DATA,
@@ -161,7 +158,7 @@ export function getUpdatedDatas(data: object): FetchUpdatedCurrencyActionType {
 
 export const exchangeRateReducer = (
   state: number = 0,
-  action: AddExchangeRateActionType
+  action: AddExchangeRateActionType,
 ) => {
   switch (action.type) {
     case EXCHANGE_RATE:
@@ -173,13 +170,13 @@ export const exchangeRateReducer = (
 
 export const favoriteReducer = (
   state: Array<string> = [],
-  action: AddFavoriteActionType | DeleteFavoriteActionType
+  action: AddFavoriteActionType | DeleteFavoriteActionType,
 ) => {
   switch (action.type) {
     case ADD_FAV:
       return [...state, action.payload];
     case DELETE_FAV:
-      return state.filter((item) => item !== action.payload);
+      return state.filter(item => item !== action.payload);
     default:
       return state;
   }
@@ -187,7 +184,7 @@ export const favoriteReducer = (
 
 export const currencyReducer = (
   state: Array<string> = [],
-  action: FetchCurrencyActionType
+  action: FetchCurrencyActionType,
 ) => {
   switch (action.type) {
     case FETCH_CURRENCY:
@@ -203,13 +200,13 @@ type UpdateStateType = {
 };
 
 const updateState: UpdateStateType = {
-  from: "EUR",
-  to: "CAD",
+  from: 'EUR',
+  to: 'CAD',
 };
 
 export const updateDataReducer = (
   state = updateState,
-  action: UpdateDataActionType
+  action: UpdateDataActionType,
 ) => {
   switch (action.type) {
     case UPDATE_DATA:
@@ -221,7 +218,7 @@ export const updateDataReducer = (
 
 export const putUpdatedDataReducer = (
   state: Array<string> = [],
-  action: FetchUpdatedCurrencyActionType
+  action: FetchUpdatedCurrencyActionType,
 ) => {
   switch (action.type) {
     case FETCH_UPDATED_CURRENCY:

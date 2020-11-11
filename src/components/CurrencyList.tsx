@@ -1,17 +1,15 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { useSelector, useDispatch } from "react-redux";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import {
   addFavorite,
   deleteFavorite,
   getFavorites,
   getRegularCurrency,
-  getNumberOfFavorites,
-} from "../redux/ducks/currency";
+} from '../redux/ducks/currency';
 
 // Components
-import { MainLoader, Empty } from ".";
+import { MainLoader, Empty } from '.';
 import {
   ListFavorite,
   BtnFavorite,
@@ -19,16 +17,13 @@ import {
   ItemFavorites,
   ItemContainer,
   Value,
-} from "../styles/components";
+} from '../styles/components';
 
 export function CurrencyList() {
   const dispatch = useDispatch();
   const favorites: Array<string> | undefined = useSelector(getFavorites);
   const regularCurrency: Array<string> | undefined = useSelector(
-    getRegularCurrency
-  );
-  const numberOfFavorites: Number | undefined = useSelector(
-    getNumberOfFavorites
+    getRegularCurrency,
   );
 
   const toggleFavAction = (text: string) => {
@@ -44,8 +39,8 @@ export function CurrencyList() {
   return (
     <>
       <ListFavorite favorite>
-        {numberOfFavorites > 0 ? (
-          favorites.map((item) => (
+        {favorites && favorites.length > 0 ? (
+          favorites.map(item => (
             <ItemFavorites key={item}>
               <ItemContainer>
                 <Value>{item}</Value>
@@ -63,7 +58,7 @@ export function CurrencyList() {
       </ListFavorite>
       <ListFavorite>
         {regularCurrency ? (
-          regularCurrency.map((item) => (
+          regularCurrency.map(item => (
             <ItemFavorites key={item}>
               <ItemContainer>
                 <Value>{item}</Value>
@@ -81,14 +76,3 @@ export function CurrencyList() {
     </>
   );
 }
-
-CurrencyList.defaultProps = {
-  numberOfFavorites: 0,
-  favorites: [],
-};
-
-CurrencyList.propTypes = {
-  numberOfFavorites: PropTypes.number,
-  favorites: PropTypes.arrayOf(PropTypes.string),
-  regularCurrency: PropTypes.arrayOf(PropTypes.string),
-};

@@ -1,13 +1,18 @@
-import React from "react";
-import "jest-styled-components";
-import { shallow } from "enzyme";
+import React from 'react';
+import { ThemeProvider } from 'styled-components';
+import { render, screen } from '@testing-library/react';
 
-import { EmptyFavorites } from "../../../styles/components";
-import theme from "../../../styles/theme";
+import { Empty } from '../../../components';
+import Theme from '../../../styles/theme';
 
-it("EmptyFavorites component works", () => {
-  const tree = shallow(
-    <EmptyFavorites theme={theme}>No favorite currencies</EmptyFavorites>
+it('renders with text', async () => {
+  render(
+    <ThemeProvider theme={Theme}>
+      <Empty />
+    </ThemeProvider>,
   );
-  expect(tree).toMatchSnapshot();
+
+  screen.debug();
+
+  expect(screen.getByText('No favorite currencies')).toBeInTheDocument();
 });
