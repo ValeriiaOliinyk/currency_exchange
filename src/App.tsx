@@ -13,11 +13,10 @@ import { Navigation, MainLoader } from "./components";
 
 // Views
 const Home = lazy(
-  () => import("./views/Home/Home" /* webpackChunkName: "home-page" */)
+  () => import("./pages/Home" /* webpackChunkName: "home-page" */)
 );
 const Currency = lazy(
-  () =>
-    import("./views/Currency/Currency" /* webpackChunkName: "currency-page" */)
+  () => import("./pages/Currency" /* webpackChunkName: "currency-page" */)
 );
 
 export default function App() {
@@ -30,6 +29,7 @@ export default function App() {
             <Switch>
               <Route path={routes.home} exact component={Home} />
               <Route path={routes.currency} component={Currency} />
+
               <Redirect to={routes.home} />
             </Switch>
           </Suspense>

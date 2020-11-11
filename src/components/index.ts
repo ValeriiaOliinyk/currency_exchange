@@ -1,6 +1,6 @@
-export { Convert } from "./Convert/Convert";
-export { CurrencyList } from "./CurrencyList/CurrencyList";
-export { CurrencyRow } from "./CurrencyRow/CurrencyRow";
-export { Empty } from "./Empty/Empty";
-export { MainLoader } from "./MainLoader/MainLoader";
-export { Navigation } from "./Navigation/Navigation";
+export { Convert } from "./Convert";
+export { CurrencyList } from "./CurrencyList";
+export { CurrencyRow } from "./CurrencyRow";
+export { Empty } from "./Empty";
+export { MainLoader } from "./MainLoader";
+export { Navigation } from "./Navigation";
