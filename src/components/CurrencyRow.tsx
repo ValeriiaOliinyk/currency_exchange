@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik } from 'formik';
+
 import {
   loadData,
   getCurrencyArray,
@@ -21,9 +22,10 @@ import {
   Option,
   FormEqually,
   FormCurrency,
-  FormControl,
-  FormSelect,
+  FormControlComponent,
   ErrorMessage,
+  SelectField,
+  FormControlBox,
 } from '../styles/components';
 
 // Styles
@@ -99,7 +101,7 @@ export function CurrencyRow() {
         {({ values, errors, touched }) => (
           <FormCurrency>
             <FormBox>
-              <FormControl
+              <FormControlComponent
                 type="number"
                 name="fromAmount"
                 value={values.fromAmount}
@@ -110,20 +112,24 @@ export function CurrencyRow() {
                   setAmountInFromCurrency(true);
                 }}
               />
-              <FormSelect
-                as="select"
-                value={fromCurrency}
-                onChange={(e: {
-                  target: { value: React.SetStateAction<string | undefined> };
-                }) => setFromCurrency(e.target.value)}
-              >
-                {currency &&
-                  currency.map(item => (
-                    <Option key={item} value={item}>
-                      {item}
-                    </Option>
-                  ))}
-              </FormSelect>
+              <FormControlBox variant="filled">
+                <SelectField
+                  native
+                  labelId="demo-simple-select-outlined-label"
+                  id="demo-simple-select-outlined"
+                  value={fromCurrency}
+                  onChange={(e: React.ChangeEvent<{ value: unknown }>) =>
+                    setFromCurrency(e.target.value as string)
+                  }
+                >
+                  {currency &&
+                    currency.map(item => (
+                      <Option key={item} value={item}>
+                        {item}
+                      </Option>
+                    ))}
+                </SelectField>
+              </FormControlBox>
             </FormBox>
             {errors.fromAmount && touched.fromAmount ? (
               <ErrorMessage>{errors.fromAmount}</ErrorMessage>
@@ -132,7 +138,7 @@ export function CurrencyRow() {
             )}
             <FormEqually />
             <FormBox>
-              <FormControl
+              <FormControlComponent
                 type="number"
                 name="toAmount"
                 value={values.toAmount}
@@ -143,20 +149,22 @@ export function CurrencyRow() {
                   setAmountInFromCurrency(false);
                 }}
               />
-              <FormSelect
-                as="select"
-                value={toCurrency}
-                onChange={(e: {
-                  target: { value: React.SetStateAction<string | undefined> };
-                }) => setToCurrency(e.target.value)}
-              >
-                {currency &&
-                  currency.map(item => (
-                    <Option key={item} value={item}>
-                      {item}
-                    </Option>
-                  ))}
-              </FormSelect>
+              <FormControlBox variant="filled">
+                <SelectField
+                  native
+                  value={toCurrency}
+                  onChange={(e: React.ChangeEvent<{ value: unknown }>) =>
+                    setToCurrency(e.target.value as string)
+                  }
+                >
+                  {currency &&
+                    currency.map(item => (
+                      <Option key={item} value={item}>
+                        {item}
+                      </Option>
+                    ))}
+                </SelectField>
+              </FormControlBox>
             </FormBox>
             {errors.toAmount && touched.toAmount ? (
               <ErrorMessage>{errors.toAmount}</ErrorMessage>
