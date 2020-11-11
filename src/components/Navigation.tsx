@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import routes from "../routes";
+import routes from '../routes';
 
 // Components
 import {
@@ -10,11 +10,11 @@ import {
   NavigationItems,
   Logo,
   NavLinks,
-} from "../styles/components";
+} from '../styles/components';
 
 export function Navigation() {
   return (
-    <Header>
+    <Header position="fixed">
       <Nav>
         <Logo />
         <NavigationList>

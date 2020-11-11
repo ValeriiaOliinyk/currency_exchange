@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadData, getFavorites } from '../redux/ducks/currency';
 
 // Components
-import { CurrencyList } from '../components';
+import { CurrencyList, Gallery } from '../components';
 import {
   MainTitle,
   Container,
@@ -29,6 +29,7 @@ export default function Home() {
     <Main>
       <Container>
         <MainTitle>Quickly Convert</MainTitle>
+        <Gallery />
         <TitleHome>List of available currencies</TitleHome>
         <Favorite>{getNumberOfFavorites()}</Favorite>
         <CurrencyList />
