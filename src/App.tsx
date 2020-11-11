@@ -18,8 +18,11 @@ const Home = lazy(
 const Currency = lazy(
   () => import("./pages/Currency" /* webpackChunkName: "currency-page" */)
 );
+const ChartPage = lazy(
+  () => import("./pages/ChartPage" /* webpackChunkName: "chart-page" */)
+);
 
-export default function App() {
+export const App = () => {
   return (
     <>
       <ThemeProvider theme={Theme}>
@@ -29,7 +32,7 @@ export default function App() {
             <Switch>
               <Route path={routes.home} exact component={Home} />
               <Route path={routes.currency} component={Currency} />
-
+              <Route path={routes.chart} component={ChartPage} />
               <Redirect to={routes.home} />
             </Switch>
           </Suspense>
@@ -37,4 +40,4 @@ export default function App() {
       </ThemeProvider>
     </>
   );
-}
+};

@@ -1,29 +1,29 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import {
   addFavorite,
   deleteFavorite,
   getFavorites,
-  getRegularCurrency,
-} from '../redux/ducks/currency';
+  getRegularCurrency
+} from "../redux/ducks/currency";
 
 // Components
-import { MainLoader, Empty } from '.';
+import { MainLoader, Empty } from ".";
 import {
   ListFavorite,
   BtnFavorite,
   BtnEmpty,
   ItemFavorites,
   ItemContainer,
-  Value,
-} from '../styles/components';
+  Value
+} from "../styles/components";
 
-export function CurrencyList() {
+export const CurrencyList = () => {
   const dispatch = useDispatch();
   const favorites: Array<string> | undefined = useSelector(getFavorites);
   const regularCurrency: Array<string> | undefined = useSelector(
-    getRegularCurrency,
+    getRegularCurrency
   );
 
   const toggleFavAction = (text: string) => {
@@ -40,15 +40,15 @@ export function CurrencyList() {
     <>
       <ListFavorite favorite>
         {favorites && favorites.length > 0 ? (
-          favorites.map(item => (
+          favorites.map((item) => (
             <ItemFavorites key={item}>
               <ItemContainer>
                 <Value>{item}</Value>
                 <BtnFavorite
-                  className="Btn"
-                  type="button"
+                  className='Btn'
+                  type='button'
                   onClick={() => toggleFavAction(item)}
-                ></BtnFavorite>
+                />
               </ItemContainer>
             </ItemFavorites>
           ))
@@ -58,14 +58,11 @@ export function CurrencyList() {
       </ListFavorite>
       <ListFavorite>
         {regularCurrency ? (
-          regularCurrency.map(item => (
+          regularCurrency.map((item) => (
             <ItemFavorites key={item}>
               <ItemContainer>
                 <Value>{item}</Value>
-                <BtnEmpty
-                  type="button"
-                  onClick={() => toggleFavAction(item)}
-                ></BtnEmpty>
+                <BtnEmpty type='button' onClick={() => toggleFavAction(item)} />
               </ItemContainer>
             </ItemFavorites>
           ))
@@ -75,4 +72,4 @@ export function CurrencyList() {
       </ListFavorite>
     </>
   );
-}
+};

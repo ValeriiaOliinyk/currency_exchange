@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import { AppBar } from '@material-ui/core';
+import styled from "styled-components";
+import { AppBar } from "@material-ui/core";
 
 export const Header = styled(AppBar)`
-  background-color: ${props => props.theme.colors.white};
+  background-color: ${(props) => props.theme.colors.white};
   @media ${({ theme }) => theme.breakpoints.tablet} {
     height: 50px;
   }

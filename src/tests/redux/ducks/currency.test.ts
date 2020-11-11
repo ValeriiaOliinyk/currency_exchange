@@ -17,7 +17,7 @@ import {
   watchUpdateData,
   workerUpdateData,
   sagaWatcher,
-  sagaWorker,
+  sagaWorker
 } from "../../../redux/ducks/currency";
 import { apiService } from "../../../api/service";
 import { currencyResponse } from "../../../helpers/fakeResponse";
@@ -28,36 +28,36 @@ it("Exchange rate should be changed to 209", () => {
   expect(newState).toBe(209);
 });
 
-it("It should add currency to favorite currencies", () => {
+it("should add currency to favorite currencies", () => {
   let action = addFavorite("UKR");
   let newState = favoriteReducer([], action);
   expect(newState).toStrictEqual(["UKR"]);
 });
 
-it("It should delete currency from favorite currencies array", () => {
+it("should delete currency from favorite currencies array", () => {
   let action = deleteFavorite("UKR");
   let newState = favoriteReducer([], action);
   expect(newState).toStrictEqual([]);
 });
 
-it("It should update from and to currencies", () => {
+it("should update from and to currencies", () => {
   let action = updateData("CAD", "EUR");
   let newState = updateDataReducer({ from: "EUR", to: "CAD" }, action);
   expect(newState).toStrictEqual({ from: "CAD", to: "EUR" });
 });
 
-it("It should add data", () => {
+it("should add data", () => {
   let action = getUpdatedDatas({
     date: "30.10.2020",
     base: "UKR",
-    rates: { value: "USD" },
+    rates: { value: "USD" }
   });
 
   let newState = putUpdatedDataReducer([], action);
   expect(newState).toStrictEqual({
     date: "30.10.2020",
     base: "UKR",
-    rates: { value: "USD" },
+    rates: { value: "USD" }
   });
 });
 
@@ -83,7 +83,7 @@ describe("Check that sagas working", () => {
 
     const dispatched: any[] = [];
     const fakeStore = {
-      dispatch: (action: any) => dispatched.push(action),
+      dispatch: (action: any) => dispatched.push(action)
     };
 
     await runSaga(fakeStore, sagaWorker).toPromise();

@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import routes from '../routes';
+import routes from "../routes";
 
 // Components
 import {
@@ -9,12 +9,12 @@ import {
   NavigationList,
   NavigationItems,
   Logo,
-  NavLinks,
-} from '../styles/components';
+  NavLinks
+} from "../styles/components";
 
-export function Navigation() {
+export const Navigation = () => {
   return (
-    <Header position="fixed">
+    <Header position='fixed'>
       <Nav>
         <Logo />
         <NavigationList>
@@ -24,8 +24,11 @@ export function Navigation() {
           <NavigationItems>
             <NavLinks to={routes.currency}>Convert</NavLinks>
           </NavigationItems>
+          <NavigationItems>
+            <NavLinks to={routes.chart}>Chart</NavLinks>
+          </NavigationItems>
         </NavigationList>
       </Nav>
     </Header>
   );
-}
+};

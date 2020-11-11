@@ -4,9 +4,9 @@ import "jest-styled-components";
 
 // Components
 
-import App from "../App";
+import { App } from "../App";
 
-it("It renders without crashing", () => {
+it("renders without crashing", () => {
   const div = document.createElement("div");
   ReactDOM.render(<App />, div);
   ReactDOM.unmountComponentAtNode(div);
