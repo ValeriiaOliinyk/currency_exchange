@@ -7,7 +7,7 @@ import { Title, Container } from "../styles/components";
 export const Convert = () => {
   return (
     <Container>
-      <Title>Convert</Title>
+      <Title>Convert Test</Title>
       <CurrencyRow />
     </Container>
   );
